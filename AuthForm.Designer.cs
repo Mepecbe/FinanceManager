@@ -1,6 +1,6 @@
 ﻿namespace FinanceManager
 {
-    partial class Form1
+    partial class AuthForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FinanceManager
 {
-    public partial class Form1 : Form
+    public partial class AuthForm : MetroFramework.Forms.MetroForm;
     {
-        public Form1()
+        public AuthForm()
         {
             InitializeComponent();
         }
