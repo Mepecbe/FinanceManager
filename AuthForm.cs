@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace FinanceManager
 {
-    public partial class AuthForm : MetroFramework.Forms.MetroForm;
+    public partial class AuthForm : MetroFramework.Forms.MetroForm
     {
         public AuthForm()
         {

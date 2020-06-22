@@ -117,12 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountsFile" xml:space="preserve">
-    <value>accounts.xml</value>
-    <comment>Файл с данными счетов</comment>
-  </data>
-  <data name="OperationsFile" xml:space="preserve">
-    <value>operations.xml</value>
-    <comment>Файл с операциями</comment>
-  </data>
+  <metadata name="metroStyleManager1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
