@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Xml;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
 using MySql.Data.MySqlClient;
+using FinanceManager.Modules.Enums;
+using FinanceManager.Modules.Structures;
 
 namespace FinanceManager.Modules
 {
@@ -21,7 +24,24 @@ namespace FinanceManager.Modules
     /// </summary>
     public static class Accounts
     {
+        private static XmlDocument XmlAccountsDocument = new XmlDocument();
 
+        /// <summary>
+        /// Загрузка аккаунтов из файла
+        /// </summary>
+        public static void Init()
+        {
+            XmlAccountsDocument.Load(Properties.Resources.AccountsFile);
+
+            XmlElement rootXmlAccountsDocument = XmlAccountsDocument.DocumentElement;
+            foreach (XmlNode node in rootXmlAccountsDocument)
+            {
+                 
+            }
+        }
+
+
+       
     }
 
 
@@ -47,4 +67,5 @@ namespace FinanceManager.Modules
     {
 
     }
+
 }

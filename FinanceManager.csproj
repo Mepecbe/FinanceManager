@@ -70,7 +70,9 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modules\Enums.cs" />
     <Compile Include="Modules\MyModule.cs" />
+    <Compile Include="Modules\Structures.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AuthForm.resx">
