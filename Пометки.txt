@@ -47,6 +47,7 @@
 
 
 	Криптовалютный кошелёк 
+		Наименование(Например, личный счет)
 		ID кошелька(если это blochain, для авторизации, не обязательно)
 		Пароль(если это blochain, для авторизации)
 		Адрес кошелька
@@ -84,8 +85,8 @@
 	<account type="Bank">
 		<name>Счёт в Беларусбанке</name>
 		<number>BY40AKBB30.....</number>
-		<summa>240,42</summa>
 		<currency>BYN</currency>
+		<summa>240,42</summa>
 	</account>
 
 	<account type="PlasticCard">
@@ -100,6 +101,7 @@
 
 
 	<account type="Crypto">
+		<name>Личный кошелёк</name>
 		<WalletID>8d37b9a2-7d5b-44a4-aa95-97a7dc7ae119</WalletID>
 		<number>1FHRUHXZRV2fDHwaZzL1ey957nLXQnEVMY</number>
 		<password>32af445aa12g</password>

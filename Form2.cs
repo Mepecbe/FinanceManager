@@ -19,7 +19,7 @@ namespace FinanceManager
         public Form2()
         {
             InitializeComponent();
-            
+            Accounts.Init();
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Xml;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Collections.Generic;
 
 using MySql.Data.MySqlClient;
@@ -16,6 +15,16 @@ namespace FinanceManager.Modules
     /// </summary>
     public static class Operations
     {
+        public static void Init()
+        {
+            if (!File.Exists(Properties.Resources.OperationsFile))
+            {
+                StreamWriter fileWriter = File.CreateText(Properties.Resources.OperationsFile);
+                fileWriter.WriteLine("<?xml version=\"1.0\"?>\n<operations>\n</operations>>  ");
+                fileWriter.Close();
+                return;
+            }
+        }
     }
 
 
@@ -24,6 +33,11 @@ namespace FinanceManager.Modules
     /// </summary>
     public static class Accounts
     {
+        public static List<BankAccount> BankAccounts = new List<BankAccount>();
+        public static List<PlasticCard> PlasticCards = new List<PlasticCard>();
+        public static List<CryptoWallet> CryptoWallets = new List<CryptoWallet>();
+        public static List<OtherAccount> OtherAccounts = new List<OtherAccount>();
+
         private static XmlDocument XmlAccountsDocument = new XmlDocument();
 
         /// <summary>
@@ -31,12 +45,51 @@ namespace FinanceManager.Modules
         /// </summary>
         public static void Init()
         {
+            if(!File.Exists(Properties.Resources.AccountsFile))
+            {
+                StreamWriter fileWriter = File.CreateText(Properties.Resources.AccountsFile);
+                fileWriter.WriteLine("<?xml version=\"1.0\"?>\n<accounts>\n</accounts>  ");
+                fileWriter.Close();
+                return;
+            }
+
+
             XmlAccountsDocument.Load(Properties.Resources.AccountsFile);
 
             XmlElement rootXmlAccountsDocument = XmlAccountsDocument.DocumentElement;
             foreach (XmlNode node in rootXmlAccountsDocument)
             {
-                 
+                string AccountType = node.Attributes["type"].Value;
+
+                switch (AccountType)
+                {
+
+                    case "Bank":        
+                        {
+                            BankAccount newAccount   = new BankAccount();
+                            newAccount.AccountName   = node.ChildNodes[0].InnerText;
+                            newAccount.AccountNumber = node.ChildNodes[1].InnerText;
+                            Enum.TryParse(node.ChildNodes[2].InnerText, out newAccount.Currency);
+                            newAccount.Money = float.Parse(node.ChildNodes[3].InnerText);
+                            
+                            break; 
+                        }
+
+                    case "PlasticCard": 
+                        {
+                            break; 
+                        }
+
+                    case "Crypto":      
+                        { 
+                            break;
+                        }
+
+                    case "Other":
+                        {
+                            break;
+                        }
+                }
             }
         }
 
