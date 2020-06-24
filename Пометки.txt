@@ -77,9 +77,8 @@
 <accounts>
 	<account type="Other">
 		<name>Деньги в кошельке</name>
-		<number></number>
-		<summa>240,42</summa>
 		<currency>BYN</currency>
+		<summa>240,42</summa>
 	</account>
 
 	<account type="Bank">
@@ -95,16 +94,17 @@
 		<CardHolder>Володько Н.И.</CardHolder>
 		<CardNumber>4255 2003 ....</CardNumber>
 		<date>07/24</date>
-		<summa>240,42</summa>
 		<currency>BYN</currency>
+		<summa>240,42</summa>
 	</account>
 
 
 	<account type="Crypto">
 		<name>Личный кошелёк</name>
 		<WalletID>8d37b9a2-7d5b-44a4-aa95-97a7dc7ae119</WalletID>
-		<number>1FHRUHXZRV2fDHwaZzL1ey957nLXQnEVMY</number>
+		<address>1FHRUHXZRV2fDHwaZzL1ey957nLXQnEVMY</address>
 		<password>32af445aa12g</password>
+		<CryptoCurrency>BTC</CryptoCurrency>
 	</account>
 
 </accounts>

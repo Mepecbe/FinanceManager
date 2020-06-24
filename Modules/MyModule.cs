@@ -59,9 +59,7 @@ namespace FinanceManager.Modules
             XmlElement rootXmlAccountsDocument = XmlAccountsDocument.DocumentElement;
             foreach (XmlNode node in rootXmlAccountsDocument)
             {
-                string AccountType = node.Attributes["type"].Value;
-
-                switch (AccountType)
+                switch (node.Attributes["type"].Value)
                 {
 
                     case "Bank":        
@@ -72,21 +70,46 @@ namespace FinanceManager.Modules
                             Enum.TryParse(node.ChildNodes[2].InnerText, out newAccount.Currency);
                             newAccount.Money = float.Parse(node.ChildNodes[3].InnerText);
                             
+                            BankAccounts.Add(newAccount);
                             break; 
                         }
 
                     case "PlasticCard": 
                         {
+                            PlasticCard newCard = new PlasticCard();
+                            newCard.Name = node.ChildNodes[0].InnerText;
+                            newCard.BankAccount = node.ChildNodes[1].InnerText;
+                            newCard.CardHolder = node.ChildNodes[2].InnerText;
+                            newCard.CardNumber = node.ChildNodes[3].InnerText;
+                            newCard.Date = node.ChildNodes[4].InnerText;
+                            Enum.TryParse(node.ChildNodes[5].InnerText, out newCard.Currency);
+                            newCard.Money = float.Parse(node.ChildNodes[6].InnerText);
+
+                            PlasticCards.Add(newCard);
                             break; 
                         }
 
                     case "Crypto":      
-                        { 
+                        {
+                            CryptoWallet newCryptoWallet = new CryptoWallet();
+                            newCryptoWallet.Name = node.ChildNodes[0].InnerText;
+                            newCryptoWallet.WalletID = node.ChildNodes[1].InnerText;
+                            newCryptoWallet.WalletAddress = node.ChildNodes[2].InnerText;
+                            newCryptoWallet.WalletPassword = node.ChildNodes[3].InnerText;
+                            Enum.TryParse(node.ChildNodes[4].InnerText, out newCryptoWallet.CryptoCurrency);
+
+                            CryptoWallets.Add(newCryptoWallet);
                             break;
                         }
 
                     case "Other":
                         {
+                            OtherAccount newOtherAccount = new OtherAccount();
+                            newOtherAccount.AccountName = node.ChildNodes[0].InnerText;
+                            Enum.TryParse(node.ChildNodes[1].InnerText, out newOtherAccount.Currency);
+                            newOtherAccount.Money = float.Parse(node.ChildNodes[2].InnerText);
+
+                            OtherAccounts.Add(newOtherAccount);
                             break;
                         }
                 }

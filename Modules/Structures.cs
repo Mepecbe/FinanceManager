@@ -10,9 +10,8 @@ namespace FinanceManager.Modules.Structures
     public struct OtherAccount
     {
         public string AccountName;
-        public string AccountNumber;
         public float Money;
-        public CurrencyType Currency;   //ЗАМЕНИТЬ
+        public CurrencyType Currency;
     }
 
     public struct BankAccount
@@ -32,11 +31,12 @@ namespace FinanceManager.Modules.Structures
         public string CardNumber;
         public string Date;
         public float Money;
-        public CurrencyType Currency;   //ЗАМЕНИТЬ
+        public CurrencyType Currency;
     }
 
     public struct CryptoWallet
     {
+        public string Name;
         public string WalletID;
         public string WalletPassword;
         public string WalletAddress;
