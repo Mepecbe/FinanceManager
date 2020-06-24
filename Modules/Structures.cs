@@ -7,6 +7,7 @@ using FinanceManager.Modules.Enums;
 
 namespace FinanceManager.Modules.Structures
 {
+
     public struct OtherAccount
     {
         public string AccountName;
@@ -20,7 +21,9 @@ namespace FinanceManager.Modules.Structures
         public string BankName;
         public string AccountNumber;
         public float Money;
-        public CurrencyType Currency;   
+        public CurrencyType Currency;
+
+        public MetroFramework.Controls.MetroTile AccountFormTile;
     }
 
     public struct PlasticCard
@@ -32,6 +35,8 @@ namespace FinanceManager.Modules.Structures
         public string Date;
         public float Money;
         public CurrencyType Currency;
+
+        public MetroFramework.Controls.MetroTile AccountFormTile;
     }
 
     public struct CryptoWallet
@@ -41,5 +46,7 @@ namespace FinanceManager.Modules.Structures
         public string WalletPassword;
         public string WalletAddress;
         public CryptoCurrencyType CryptoCurrency;
+
+        public MetroFramework.Controls.MetroTile AccountFormTile;
     }
 }

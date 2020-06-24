@@ -106,6 +106,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\CoinsImage.bmp" />
+    <None Include="Resources\Coins.png" />
+    <None Include="Resources\icon__0031s_0000_Compound-Shape.png" />
     <Content Include="Пометки.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

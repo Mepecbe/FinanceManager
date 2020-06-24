@@ -19,7 +19,22 @@ namespace FinanceManager
         public Form2()
         {
             InitializeComponent();
-            Accounts.Init();
+
+            TileManager.Page = this.BankAccountsPage;
+            Accounts.Init();          
+        }
+
+        private void Form2_Resize(object sender, EventArgs e)
+        {
+            for(int index = 0; index < OperationsList.Columns.Count; index++)
+            {
+                OperationsList.Columns[index].Width = tabPage1.Width / OperationsList.Columns.Count;
+            }
+        }
+
+        private void добавитьСчетToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TileManager.BankAccountsTab.AddTile("123");
         }
     }
 }

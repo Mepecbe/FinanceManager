@@ -8,6 +8,8 @@ using MySql.Data.MySqlClient;
 using FinanceManager.Modules.Enums;
 using FinanceManager.Modules.Structures;
 
+using MetroFramework.Controls;
+
 namespace FinanceManager.Modules
 {
     /// <summary>
@@ -114,10 +116,77 @@ namespace FinanceManager.Modules
                         }
                 }
             }
+        }                      
+    }
+
+
+    ///<summary>
+    /// Класс, который отвечает за элементы 'Tile' на форме
+    /// </summary>
+    public static class TileManager
+    {
+        public static MetroTabPage Page;
+        ///<summary>
+        /// Класс, для работы с элементами Tile вкладки банковских счетов
+        /// </summary>
+        public static class BankAccountsTab
+        {
+            private static List<MetroTile> TileList = new List<MetroTile>();
+
+            public static void DeleteTile(string name)
+            {
+
+            }
+
+            public static void DeleteTile(MetroTile tile)
+            {
+
+            }
+
+            public static MetroFramework.Controls.MetroTile AddTile(string TileText)
+            {
+                MetroTile newTile = new MetroTile();
+
+                System.Drawing.Point FormPosition = new System.Drawing.Point(0, 19);
+
+                {
+                    //Подсчет расположения элемента на форме
+                    //Количество TIL'ей на форме = размер формы пикс / размер одного TIL'я
+                    if(TileList.Count == 0)
+                    {
+                        FormPosition.X = 17;
+                    }
+                    else if(TileList.Count < (int)Math.Ceiling(744 / (184f*2)))
+                    {
+                        FormPosition.X = TileList[0].Size.Width * TileList.Count + (TileList.Count * 50) + 50;
+                    }
+                    else
+                    {
+                        //Если на этом ряду уже не вмещаются
+                        FormPosition.X = 17;
+                        FormPosition.Y = 30 + TileList[0].Size.Height;
+                    }
+                }
+
+                newTile.ActiveControl = null;
+                newTile.Location = FormPosition;
+                newTile.Name = "BMetroTile"+(TileList.Count+1).ToString();
+                newTile.Size = new System.Drawing.Size(184, 136);
+                newTile.TabIndex = TileList.Count+1;
+                newTile.Text = TileText;
+                newTile.TileImage = global::FinanceManager.Properties.Resources.Coins;
+                newTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                newTile.UseSelectable = true;
+                newTile.UseTileImage = true;
+
+
+                Page.Controls.Add(newTile);
+                TileList.Add(newTile);
+
+                return newTile;
+            }
         }
 
-
-       
     }
 
 
