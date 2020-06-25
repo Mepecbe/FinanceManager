@@ -126,6 +126,8 @@ namespace FinanceManager.Modules
     public static class TileManager
     {
         public static MetroTabPage Page;
+        public static Form GlavnForm;
+
         ///<summary>
         /// Класс, для работы с элементами Tile вкладки банковских счетов
         /// </summary>
@@ -143,37 +145,17 @@ namespace FinanceManager.Modules
 
             }
 
-            public static MetroFramework.Controls.MetroTile AddTile(string TileText)
+            public static MetroTile AddTile(string TileText)
             {
                 MetroTile newTile = new MetroTile();
 
-                System.Drawing.Point FormPosition = new System.Drawing.Point(0, 19);
-
-                {
-                    //Подсчет расположения элемента на форме
-                    //Количество TIL'ей на форме = размер формы пикс / размер одного TIL'я
-                    if(TileList.Count == 0)
-                    {
-                        FormPosition.X = 17;
-                    }
-                    else if(TileList.Count < (int)Math.Ceiling(744 / (184f*2)))
-                    {
-                        FormPosition.X = TileList[0].Size.Width * TileList.Count + (TileList.Count * 50) + 50;
-                    }
-                    else
-                    {
-                        //Если на этом ряду уже не вмещаются
-                        FormPosition.X = 17;
-                        FormPosition.Y = 30 + TileList[0].Size.Height;
-                    }
-                }
-
                 newTile.ActiveControl = null;
-                newTile.Location = FormPosition;
+                newTile.Location = new System.Drawing.Point(0,0);
                 newTile.Name = "BMetroTile"+(TileList.Count+1).ToString();
                 newTile.Size = new System.Drawing.Size(184, 136);
                 newTile.TabIndex = TileList.Count+1;
                 newTile.Text = TileText;
+                newTile.Theme = Page.Theme;
                 newTile.TileImage = global::FinanceManager.Properties.Resources.Coins;
                 newTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 newTile.UseSelectable = true;
@@ -183,7 +165,44 @@ namespace FinanceManager.Modules
                 Page.Controls.Add(newTile);
                 TileList.Add(newTile);
 
+                RePaint();
+
                 return newTile;
+            }
+
+            public static void RePaint()
+            {
+                //Расстояние между блоками 'Tile' на форме по горизонтали(в строке), 
+                //ОТСТУП ТАК ЖЕ ПРИМЕНЯЕТСЯ ДЛЯ ПЕРВОГО ЭЛЕМЕНТА В СТРОКЕ
+                byte horisontalOffset = 20;
+
+                //Расстояние между блоками 'Tile' на форме по вертикали(т.е. между строками)
+                byte verticalOffset   = 20; 
+
+                //Перерисовка/пересчитывание расположения элементов 'Tile' на форме
+                byte CountTileInRow = (byte)Math.Ceiling(Page.Width / 184f);
+                byte CountRows      = (byte)Math.Ceiling(Page.Height / 136f);
+                byte TileIndex      = 0; //Индекс элемента, положение которого выставляется
+
+                //Высота для каждого блока и расстояний между блоками
+                GlavnForm.Height = (CountRows * 136) + (CountRows * verticalOffset); 
+
+                for(byte Row = 0; Row < CountRows && TileIndex < TileList.Count; Row++)
+                {
+                    int Y = 18; //Координата по Y для этой строки
+                    for(byte TileNumber = 0; TileNumber < CountTileInRow && TileIndex < TileList.Count; TileNumber++)
+                    {
+                        byte X = (byte)(horisontalOffset + (TileNumber * 136)); //Координата по X для этого элемента
+
+                        TileList[TileIndex].Location = new System.Drawing.Point(X, Y);
+                        TileIndex++;
+                    }
+                }
+
+                for (byte index = 0; index < TileList.Count; index++ )
+                { 
+
+                }
             }
         }
 

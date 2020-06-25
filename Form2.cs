@@ -21,6 +21,7 @@ namespace FinanceManager
             InitializeComponent();
 
             TileManager.Page = this.BankAccountsPage;
+            TileManager.GlavnForm = this;
             Accounts.Init();          
         }
 
