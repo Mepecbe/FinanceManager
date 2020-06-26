@@ -33,6 +33,8 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.metroTabControl2 = new MetroFramework.Controls.MetroTabControl();
             this.BankAccountsPage = new MetroFramework.Controls.MetroTabPage();
+            this.BankAccountsContext = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.добавитьСчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BMetroTile1 = new MetroFramework.Controls.MetroTile();
             this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.metroTile2 = new MetroFramework.Controls.MetroTile();
@@ -46,16 +48,14 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.BankAccountsContext = new MetroFramework.Controls.MetroContextMenu(this.components);
-            this.добавитьСчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.metroTabControl2.SuspendLayout();
             this.BankAccountsPage.SuspendLayout();
+            this.BankAccountsContext.SuspendLayout();
             this.metroTabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.metroTabControl1.SuspendLayout();
-            this.BankAccountsContext.SuspendLayout();
             this.SuspendLayout();
             // 
             // metroStyleManager1
@@ -68,7 +68,7 @@
             this.tabPage2.Controls.Add(this.metroTabControl2);
             this.tabPage2.Location = new System.Drawing.Point(4, 38);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(752, 328);
+            this.tabPage2.Size = new System.Drawing.Size(752, 305);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Счета";
             // 
@@ -82,7 +82,7 @@
             this.metroTabControl2.Location = new System.Drawing.Point(0, 0);
             this.metroTabControl2.Name = "metroTabControl2";
             this.metroTabControl2.SelectedIndex = 0;
-            this.metroTabControl2.Size = new System.Drawing.Size(752, 328);
+            this.metroTabControl2.Size = new System.Drawing.Size(752, 305);
             this.metroTabControl2.TabIndex = 0;
             this.metroTabControl2.UseSelectable = true;
             // 
@@ -95,12 +95,29 @@
             this.BankAccountsPage.HorizontalScrollbarSize = 10;
             this.BankAccountsPage.Location = new System.Drawing.Point(4, 38);
             this.BankAccountsPage.Name = "BankAccountsPage";
-            this.BankAccountsPage.Size = new System.Drawing.Size(744, 286);
+            this.BankAccountsPage.Size = new System.Drawing.Size(744, 263);
             this.BankAccountsPage.TabIndex = 0;
             this.BankAccountsPage.Text = "Банковские счета";
+            this.BankAccountsPage.VerticalScrollbar = true;
             this.BankAccountsPage.VerticalScrollbarBarColor = true;
-            this.BankAccountsPage.VerticalScrollbarHighlightOnWheel = false;
+            this.BankAccountsPage.VerticalScrollbarHighlightOnWheel = true;
             this.BankAccountsPage.VerticalScrollbarSize = 10;
+            // 
+            // BankAccountsContext
+            // 
+            this.BankAccountsContext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.BankAccountsContext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.BankAccountsContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.добавитьСчетToolStripMenuItem});
+            this.BankAccountsContext.Name = "BankAccountsContext";
+            this.BankAccountsContext.Size = new System.Drawing.Size(154, 26);
+            // 
+            // добавитьСчетToolStripMenuItem
+            // 
+            this.добавитьСчетToolStripMenuItem.Name = "добавитьСчетToolStripMenuItem";
+            this.добавитьСчетToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.добавитьСчетToolStripMenuItem.Text = "Добавить счет";
+            this.добавитьСчетToolStripMenuItem.Click += new System.EventHandler(this.добавитьСчетToolStripMenuItem_Click);
             // 
             // BMetroTile1
             // 
@@ -235,32 +252,19 @@
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
             this.metroTabControl1.SelectedIndex = 1;
-            this.metroTabControl1.Size = new System.Drawing.Size(760, 370);
+            this.metroTabControl1.Size = new System.Drawing.Size(760, 347);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
-            // 
-            // BankAccountsContext
-            // 
-            this.BankAccountsContext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.BankAccountsContext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.BankAccountsContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавитьСчетToolStripMenuItem});
-            this.BankAccountsContext.Name = "BankAccountsContext";
-            this.BankAccountsContext.Size = new System.Drawing.Size(154, 26);
-            // 
-            // добавитьСчетToolStripMenuItem
-            // 
-            this.добавитьСчетToolStripMenuItem.Name = "добавитьСчетToolStripMenuItem";
-            this.добавитьСчетToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
-            this.добавитьСчетToolStripMenuItem.Text = "Добавить счет";
-            this.добавитьСчетToolStripMenuItem.Click += new System.EventHandler(this.добавитьСчетToolStripMenuItem_Click);
+            this.metroTabControl1.SizeChanged += new System.EventHandler(this.metroTabControl1_Resize);
+            this.metroTabControl1.Resize += new System.EventHandler(this.metroTabControl1_Resize);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 427);
             this.Controls.Add(this.metroTabControl1);
+            this.MinimumSize = new System.Drawing.Size(652, 0);
             this.Name = "Form2";
             this.Text = "Обозреватель";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
@@ -269,10 +273,10 @@
             this.tabPage2.ResumeLayout(false);
             this.metroTabControl2.ResumeLayout(false);
             this.BankAccountsPage.ResumeLayout(false);
+            this.BankAccountsContext.ResumeLayout(false);
             this.metroTabPage2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.metroTabControl1.ResumeLayout(false);
-            this.BankAccountsContext.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

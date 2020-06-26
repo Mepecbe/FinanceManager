@@ -11,7 +11,7 @@ namespace FinanceManager.Modules.Structures
     public struct OtherAccount
     {
         public string AccountName;
-        public float Money;
+        public float AccountAmount;
         public CurrencyType Currency;
     }
 
@@ -20,7 +20,7 @@ namespace FinanceManager.Modules.Structures
         public string AccountName;
         public string BankName;
         public string AccountNumber;
-        public float Money;
+        public float AccountAmount;
         public CurrencyType Currency;
 
         public MetroFramework.Controls.MetroTile AccountFormTile;
@@ -33,7 +33,7 @@ namespace FinanceManager.Modules.Structures
         public string CardHolder;
         public string CardNumber;
         public string Date;
-        public float Money;
+        public float AccountAmount;
         public CurrencyType Currency;
 
         public MetroFramework.Controls.MetroTile AccountFormTile;

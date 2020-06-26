@@ -85,7 +85,7 @@
 		<name>Счёт в Беларусбанке</name>
 		<number>BY40AKBB30.....</number>
 		<currency>BYN</currency>
-		<summa>240,42</summa>
+		<AccountAmount>240,42</AccountAmount>
 	</account>
 
 	<account type="PlasticCard">
