@@ -169,6 +169,38 @@ namespace FinanceManager.Modules
 
                 TileManager.BankAccountsTab.AddTile(AccountName);
             }
+
+            public static void DeleteAccount(MetroFramework.Controls.MetroTile tile)
+            {
+                if (tile == null) return;
+
+                for (int index = 0; index < List_BankAccounts.Count; index++)
+                {
+                    if(List_BankAccounts[index].AccountName == tile.Text)
+                    {
+                        List_BankAccounts.RemoveAt(index);
+
+                        for(int XmlChildIndex = 0; XmlChildIndex < XmlAccountsDocument.DocumentElement.ChildNodes.Count; XmlChildIndex++)
+                        {
+                            string dd = XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].InnerText;
+
+                            string a = XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].Attributes["type"].Value;
+                            string b = XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].ChildNodes[0].InnerText;
+
+                            if (XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].Attributes["type"].Value == "Bank"
+                                && XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].ChildNodes[0].InnerText == tile.Text)
+                            {
+                                XmlAccountsDocument.DocumentElement.RemoveChild(XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex]);
+                                break;
+                            }
+                        }
+
+                        break;
+                    }
+                }
+
+                TileManager.BankAccountsTab.DeleteTile(tile);
+            }
         }
 
         public static void Save()
@@ -184,7 +216,7 @@ namespace FinanceManager.Modules
     public static class TileManager
     {
         public static MetroTabPage Page;
-        public static Form GlavnForm;
+        public static Form2 GlavnForm;
 
         ///<summary>
         /// Класс, для работы с элементами Tile вкладки банковских счетов
@@ -207,7 +239,8 @@ namespace FinanceManager.Modules
             }
 
             public static void DeleteTile(MetroTile tile)
-            {                
+            {
+                tile.Visible = false;
                 GlavnForm.Controls.Remove(tile);
                 TileList.Remove(tile);
                 RePaint();
@@ -230,6 +263,7 @@ namespace FinanceManager.Modules
                 newTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 newTile.UseSelectable = true;
                 newTile.UseTileImage = true;
+                newTile.MouseMove += GlavnForm.MouseOnTile;
 
 
                 Page.Controls.Add(newTile);

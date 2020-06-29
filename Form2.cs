@@ -67,9 +67,15 @@ namespace FinanceManager
             Accounts.Save();
         }
 
+        public MetroFramework.Controls.MetroTile tile;
+        public void MouseOnTile(object sender, EventArgs args)
+        {
+            tile = (MetroFramework.Controls.MetroTile)sender;
+        }
+
         private void удалитьСчетToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Accounts.BankAccounts.DeleteAccount(this.tile);
         }
     }
 }
