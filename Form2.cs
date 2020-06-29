@@ -35,19 +35,15 @@ namespace FinanceManager
         }
 
         private void добавитьСчетToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TileManager.BankAccountsTab.AddTile("123"); //Для отладки алгоритма 
-
+        {            
             AddBankAccount addBankAccountForm = new AddBankAccount();
             addBankAccountForm.ShowDialog();
 
             if (addBankAccountForm.OK)
             {
                 CurrencyType type;
-                if (!Enum.TryParse(addBankAccountForm.AccountCurrency.Text, out type))
-                {
-                    MetroFramework.MetroMessageBox.Show(this, "Неизвестная ошибка ", "Ошибка");
-                }
+
+                Enum.TryParse(addBankAccountForm.AccountCurrency.Text, out type);
 
                 Accounts.BankAccounts.AddBankAccount(
                     addBankAccountForm.AccountName.Text,
@@ -64,6 +60,16 @@ namespace FinanceManager
             {
                 TileManager.BankAccountsTab.RePaint();
             }
+        }
+
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Accounts.Save();
+        }
+
+        private void удалитьСчетToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

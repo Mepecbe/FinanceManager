@@ -102,7 +102,8 @@
             this.AccountName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.AccountName.CustomButton.UseSelectable = true;
             this.AccountName.CustomButton.Visible = false;
-            this.AccountName.Lines = new string[0];
+            this.AccountName.Lines = new string[] {
+        "Счет для отладки"};
             this.AccountName.Location = new System.Drawing.Point(207, 81);
             this.AccountName.MaxLength = 32767;
             this.AccountName.Name = "AccountName";
@@ -114,6 +115,7 @@
             this.AccountName.ShortcutsEnabled = true;
             this.AccountName.Size = new System.Drawing.Size(154, 23);
             this.AccountName.TabIndex = 5;
+            this.AccountName.Text = "Счет для отладки";
             this.AccountName.UseSelectable = true;
             this.AccountName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.AccountName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -132,7 +134,8 @@
             this.AccountNumber.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.AccountNumber.CustomButton.UseSelectable = true;
             this.AccountNumber.CustomButton.Visible = false;
-            this.AccountNumber.Lines = new string[0];
+            this.AccountNumber.Lines = new string[] {
+        "4255 6200 6"};
             this.AccountNumber.Location = new System.Drawing.Point(206, 127);
             this.AccountNumber.MaxLength = 32767;
             this.AccountNumber.Name = "AccountNumber";
@@ -144,6 +147,7 @@
             this.AccountNumber.ShortcutsEnabled = true;
             this.AccountNumber.Size = new System.Drawing.Size(154, 23);
             this.AccountNumber.TabIndex = 6;
+            this.AccountNumber.Text = "4255 6200 6";
             this.AccountNumber.UseSelectable = true;
             this.AccountNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.AccountNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
@@ -154,7 +158,7 @@
             // 
             // 
             this.SummOnAccount.CustomButton.Image = null;
-            this.SummOnAccount.CustomButton.Location = new System.Drawing.Point(130, 1);
+            this.SummOnAccount.CustomButton.Location = new System.Drawing.Point(134, 1);
             this.SummOnAccount.CustomButton.Name = "";
             this.SummOnAccount.CustomButton.Size = new System.Drawing.Size(21, 21);
             this.SummOnAccount.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
@@ -162,7 +166,8 @@
             this.SummOnAccount.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.SummOnAccount.CustomButton.UseSelectable = true;
             this.SummOnAccount.CustomButton.Visible = false;
-            this.SummOnAccount.Lines = new string[0];
+            this.SummOnAccount.Lines = new string[] {
+        "200,34"};
             this.SummOnAccount.Location = new System.Drawing.Point(205, 212);
             this.SummOnAccount.MaxLength = 32767;
             this.SummOnAccount.Name = "SummOnAccount";
@@ -174,6 +179,7 @@
             this.SummOnAccount.ShortcutsEnabled = true;
             this.SummOnAccount.Size = new System.Drawing.Size(156, 23);
             this.SummOnAccount.TabIndex = 7;
+            this.SummOnAccount.Text = "200,34";
             this.SummOnAccount.UseSelectable = true;
             this.SummOnAccount.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.SummOnAccount.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);

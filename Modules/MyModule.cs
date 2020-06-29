@@ -126,13 +126,54 @@ namespace FinanceManager.Modules
         {
             public static void AddBankAccount(string AccountName, string AccountNumber, CurrencyType Currency, float AccountAmount)
             {
-                BankAccount NewBankAccount = new BankAccount();
-                NewBankAccount.AccountName = AccountName;
-                NewBankAccount.AccountNumber = AccountNumber;
-                NewBankAccount.Currency = Currency;
-                NewBankAccount.AccountAmount = AccountAmount;
+                {
+                    //Добавление в лист счетов
+                    BankAccount NewBankAccount = new BankAccount();
+
+                    NewBankAccount.AccountName = AccountName;
+                    NewBankAccount.AccountNumber = AccountNumber;
+                    NewBankAccount.Currency = Currency;
+                    NewBankAccount.AccountAmount = AccountAmount;
+
+                    List_BankAccounts.Add(NewBankAccount);
+                }
+
+                {
+                    //Сохранение счета в файл
+                    XmlElement newAccount = XmlAccountsDocument.CreateElement("account");
+                    XmlAttribute attribute = XmlAccountsDocument.CreateAttribute("type");
+                    attribute.Value = "Bank";
+
+                    newAccount.Attributes.Append(attribute);
+
+                    XmlElement XmlAccountName = XmlAccountsDocument.CreateElement("name");
+                    XmlAccountName.InnerText = AccountName;
+
+                    XmlElement XmlAccountNumber = XmlAccountsDocument.CreateElement("number");
+                    XmlAccountNumber.InnerText = AccountNumber;
+
+                    XmlElement XmlAccountCurrency = XmlAccountsDocument.CreateElement("currency");
+                    XmlAccountCurrency.InnerText = Currency.ToString();
+
+                    XmlElement XmlAccountAmount = XmlAccountsDocument.CreateElement("AccountAmount");
+                    XmlAccountAmount.InnerText = AccountAmount.ToString();
+
+                    newAccount.AppendChild(XmlAccountName);
+                    newAccount.AppendChild(XmlAccountNumber);
+                    newAccount.AppendChild(XmlAccountCurrency);
+                    newAccount.AppendChild(XmlAccountAmount);
+
+                    XmlAccountsDocument.DocumentElement.AppendChild(newAccount);
+                }
+
+
                 TileManager.BankAccountsTab.AddTile(AccountName);
             }
+        }
+
+        public static void Save()
+        {
+            XmlAccountsDocument.Save(Properties.Resources.AccountsFile);
         }
     }
 
@@ -227,7 +268,8 @@ namespace FinanceManager.Modules
                 //Высота для каждого блока и расстояний между блоками
                 //GlavnForm.Height = (CountRows * 136) + (CountRows * verticalOffset);
 
-                MessageBox.Show($"Для размеров формы {GlavnForm.Width},{GlavnForm.Height}\nСтрок {CountRows}\nЭлементов в строке {CountTileInRow}");
+                //ONLY DEBUG
+                //MessageBox.Show($"Для размеров формы {GlavnForm.Width},{GlavnForm.Height}\nСтрок {CountRows}\nЭлементов в строке {CountTileInRow}");
 
 
                 int Y = 18; //Координата по Y для строки
@@ -240,6 +282,7 @@ namespace FinanceManager.Modules
                         TileList[TileIndex].Location = new System.Drawing.Point(X, Y);
                         TileIndex++;
 
+                        //ONLY DEBUG
                         //MessageBox.Show($" Установка форматирования для Строка {Row} Элемент {TileNumber}\n Координаты X,Y {X},{Y}");
                     }
 

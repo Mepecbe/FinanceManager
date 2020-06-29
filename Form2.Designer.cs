@@ -48,6 +48,7 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.удалитьСчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.metroTabControl2.SuspendLayout();
@@ -108,9 +109,10 @@
             this.BankAccountsContext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BankAccountsContext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BankAccountsContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.добавитьСчетToolStripMenuItem});
+            this.добавитьСчетToolStripMenuItem,
+            this.удалитьСчетToolStripMenuItem});
             this.BankAccountsContext.Name = "BankAccountsContext";
-            this.BankAccountsContext.Size = new System.Drawing.Size(154, 26);
+            this.BankAccountsContext.Size = new System.Drawing.Size(181, 70);
             // 
             // добавитьСчетToolStripMenuItem
             // 
@@ -141,7 +143,7 @@
             this.metroTabPage2.HorizontalScrollbarSize = 10;
             this.metroTabPage2.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(744, 286);
+            this.metroTabPage2.Size = new System.Drawing.Size(744, 263);
             this.metroTabPage2.TabIndex = 1;
             this.metroTabPage2.Text = "Пластиковые карточки";
             this.metroTabPage2.VerticalScrollbarBarColor = true;
@@ -168,7 +170,7 @@
             this.metroTabPage3.HorizontalScrollbarSize = 10;
             this.metroTabPage3.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage3.Name = "metroTabPage3";
-            this.metroTabPage3.Size = new System.Drawing.Size(744, 286);
+            this.metroTabPage3.Size = new System.Drawing.Size(744, 263);
             this.metroTabPage3.TabIndex = 2;
             this.metroTabPage3.Text = "Криптовалютные кошельки";
             this.metroTabPage3.VerticalScrollbarBarColor = true;
@@ -182,7 +184,7 @@
             this.metroTabPage4.HorizontalScrollbarSize = 10;
             this.metroTabPage4.Location = new System.Drawing.Point(4, 38);
             this.metroTabPage4.Name = "metroTabPage4";
-            this.metroTabPage4.Size = new System.Drawing.Size(744, 286);
+            this.metroTabPage4.Size = new System.Drawing.Size(744, 263);
             this.metroTabPage4.TabIndex = 3;
             this.metroTabPage4.Text = "Остальное";
             this.metroTabPage4.VerticalScrollbarBarColor = true;
@@ -194,7 +196,7 @@
             this.tabPage1.Controls.Add(this.OperationsList);
             this.tabPage1.Location = new System.Drawing.Point(4, 38);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(752, 328);
+            this.tabPage1.Size = new System.Drawing.Size(752, 305);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Операции";
             // 
@@ -213,7 +215,7 @@
             this.OperationsList.Name = "OperationsList";
             this.OperationsList.OwnerDraw = true;
             this.OperationsList.Scrollable = false;
-            this.OperationsList.Size = new System.Drawing.Size(752, 328);
+            this.OperationsList.Size = new System.Drawing.Size(752, 305);
             this.OperationsList.TabIndex = 0;
             this.OperationsList.UseCompatibleStateImageBehavior = false;
             this.OperationsList.UseSelectable = true;
@@ -258,6 +260,13 @@
             this.metroTabControl1.SizeChanged += new System.EventHandler(this.metroTabControl1_Resize);
             this.metroTabControl1.Resize += new System.EventHandler(this.metroTabControl1_Resize);
             // 
+            // удалитьСчетToolStripMenuItem
+            // 
+            this.удалитьСчетToolStripMenuItem.Name = "удалитьСчетToolStripMenuItem";
+            this.удалитьСчетToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.удалитьСчетToolStripMenuItem.Text = "Удалить счет";
+            this.удалитьСчетToolStripMenuItem.Click += new System.EventHandler(this.удалитьСчетToolStripMenuItem_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -268,6 +277,7 @@
             this.Name = "Form2";
             this.Text = "Обозреватель";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
             this.Resize += new System.EventHandler(this.Form2_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -301,5 +311,6 @@
         private MetroFramework.Controls.MetroTile metroTile2;
         private MetroFramework.Controls.MetroContextMenu BankAccountsContext;
         private System.Windows.Forms.ToolStripMenuItem добавитьСчетToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem удалитьСчетToolStripMenuItem;
     }
 }
