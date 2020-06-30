@@ -64,7 +64,7 @@ namespace FinanceManager
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Accounts.Save();
+            Accounts.SaveAll();
         }
 
         public MetroFramework.Controls.MetroTile tile;

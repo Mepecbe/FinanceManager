@@ -27,6 +27,17 @@ namespace FinanceManager.Modules
                 return;
             }
         }
+
+        public static void AddOperation()
+        {
+
+        }
+
+
+        public static void DeleteOperation()
+        {
+
+        }
     }
 
 
@@ -35,8 +46,8 @@ namespace FinanceManager.Modules
     /// </summary>
     public static class Accounts
     {
-        public static List<BankAccount>  List_BankAccounts  = new List<BankAccount>();
-        public static List<PlasticCard>  List_PlasticCards  = new List<PlasticCard>();
+        public static List<BankAccount> List_BankAccounts = new List<BankAccount>();
+        public static List<PlasticCard> List_PlasticCards = new List<PlasticCard>();
         public static List<CryptoWallet> List_CryptoWallets = new List<CryptoWallet>();
         public static List<OtherAccount> List_OtherAccounts = new List<OtherAccount>();
 
@@ -47,7 +58,7 @@ namespace FinanceManager.Modules
         /// </summary>
         public static void Init()
         {
-            if(!File.Exists(Properties.Resources.AccountsFile))
+            if (!File.Exists(Properties.Resources.AccountsFile))
             {
                 StreamWriter fileWriter = File.CreateText(Properties.Resources.AccountsFile);
                 fileWriter.WriteLine("<?xml version=\"1.0\"?>\n<accounts>\n</accounts>  ");
@@ -64,20 +75,20 @@ namespace FinanceManager.Modules
                 switch (node.Attributes["type"].Value)
                 {
 
-                    case "Bank":        
+                    case "Bank":
                         {
-                            BankAccount newAccount   = new BankAccount();
-                            newAccount.AccountName   = node.ChildNodes[0].InnerText;
+                            BankAccount newAccount = new BankAccount();
+                            newAccount.AccountName = node.ChildNodes[0].InnerText;
                             newAccount.AccountNumber = node.ChildNodes[1].InnerText;
                             Enum.TryParse(node.ChildNodes[2].InnerText, out newAccount.Currency);
                             newAccount.AccountAmount = float.Parse(node.ChildNodes[3].InnerText);
 
                             List_BankAccounts.Add(newAccount);
                             TileManager.BankAccountsTab.AddTile(newAccount.AccountName);
-                            break; 
+                            break;
                         }
 
-                    case "PlasticCard": 
+                    case "PlasticCard":
                         {
                             PlasticCard newCard = new PlasticCard();
                             newCard.Name = node.ChildNodes[0].InnerText;
@@ -89,10 +100,10 @@ namespace FinanceManager.Modules
                             newCard.AccountAmount = float.Parse(node.ChildNodes[6].InnerText);
 
                             List_PlasticCards.Add(newCard);
-                            break; 
+                            break;
                         }
 
-                    case "Crypto":      
+                    case "Crypto":
                         {
                             CryptoWallet newCryptoWallet = new CryptoWallet();
                             newCryptoWallet.Name = node.ChildNodes[0].InnerText;
@@ -117,7 +128,7 @@ namespace FinanceManager.Modules
                         }
                 }
             }
-        }                      
+        }
 
         ///<summary>
         ///Класс для работы с банковскими аккаунтами
@@ -176,11 +187,11 @@ namespace FinanceManager.Modules
 
                 for (int index = 0; index < List_BankAccounts.Count; index++)
                 {
-                    if(List_BankAccounts[index].AccountName == tile.Text)
+                    if (List_BankAccounts[index].AccountName == tile.Text)
                     {
                         List_BankAccounts.RemoveAt(index);
 
-                        for(int XmlChildIndex = 0; XmlChildIndex < XmlAccountsDocument.DocumentElement.ChildNodes.Count; XmlChildIndex++)
+                        for (int XmlChildIndex = 0; XmlChildIndex < XmlAccountsDocument.DocumentElement.ChildNodes.Count; XmlChildIndex++)
                         {
                             string dd = XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].InnerText;
 
@@ -203,7 +214,21 @@ namespace FinanceManager.Modules
             }
         }
 
-        public static void Save()
+
+        public static class PlasticCards
+        {
+            public static void AddPlasticCard()
+            {
+
+            }
+
+            public static void DeletePlasticCard()
+            {
+
+            }
+        }
+
+        public static void SaveAll()
         {
             XmlAccountsDocument.Save(Properties.Resources.AccountsFile);
         }
@@ -215,8 +240,10 @@ namespace FinanceManager.Modules
     /// </summary>
     public static class TileManager
     {
-        public static MetroTabPage Page;
         public static Form2 GlavnForm;
+        public static MetroTabPage BankAccountsPage;
+        public static MetroTabPage PlasticCardsPage;
+
 
         ///<summary>
         /// Класс, для работы с элементами Tile вкладки банковских счетов
@@ -225,40 +252,32 @@ namespace FinanceManager.Modules
         {
             private static List<MetroTile> TileList = new List<MetroTile>();
 
-            public static void DeleteTile(string TileText)
-            {
-                for(int index = 0; index < TileList.Count; index++)
-                {
-                    if(TileList[index].Text == TileText)
-                    {
-                        GlavnForm.Controls.Remove(TileList[index]);
-                        TileList.RemoveAt(index);
-                        RePaint();
-                    }
-                }
-            }
-
+            /// <summary>
+            /// Удалить элемент Tile и пересчитать расположение их на форме
+            /// </summary>
+            /// <param name="tile"></param>
             public static void DeleteTile(MetroTile tile)
             {
-                tile.Visible = false;
-                GlavnForm.Controls.Remove(tile);
+                BankAccountsPage.Controls.Remove(tile);
                 TileList.Remove(tile);
                 RePaint();
             }
 
-            
 
+            /// <summary>
+            ///    Добавление элемента Tile на форму и в лист
+            /// </summary>
             public static MetroTile AddTile(string TileText)
             {
                 MetroTile newTile = new MetroTile();
 
                 newTile.ActiveControl = null;
-                newTile.Location = new System.Drawing.Point(0,0);
-                newTile.Name = "BMetroTile"+(TileList.Count+1).ToString();
+                newTile.Location = new System.Drawing.Point(0, 0);
+                newTile.Name = "BMetroTile" + (TileList.Count + 1).ToString();
                 newTile.Size = new System.Drawing.Size(184, 136);
-                newTile.TabIndex = TileList.Count+1;
+                newTile.TabIndex = TileList.Count + 1;
                 newTile.Text = TileText;
-                newTile.Theme = Page.Theme;
+                newTile.Theme = BankAccountsPage.Theme;
                 newTile.TileImage = global::FinanceManager.Properties.Resources.Coins;
                 newTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 newTile.UseSelectable = true;
@@ -266,7 +285,7 @@ namespace FinanceManager.Modules
                 newTile.MouseMove += GlavnForm.MouseOnTile;
 
 
-                Page.Controls.Add(newTile);
+                BankAccountsPage.Controls.Add(newTile);
                 TileList.Add(newTile);
 
                 RePaint();
@@ -278,12 +297,18 @@ namespace FinanceManager.Modules
             //Хранит в себе количество элементов в строке ДО изменения размера окна пользователем
             private static byte CountTileInRow = 0;
 
+            /// <summary>
+            ///     Нужно ли перерисовывать элементы Tile на вкладке
+            /// </summary>
             public static bool RePaintAvailable()
             {
-                if ((byte)Math.Ceiling(Page.Width / (184f + 85)) != CountTileInRow) return true;
+                if ((byte)Math.Ceiling(BankAccountsPage.Width / (184f + 85)) != CountTileInRow) return true;
                 return false;
             }
 
+            /// <summary>
+            /// Перерисовка расположения элементов Tile на вкладке
+            /// </summary>
             public static void RePaint()
             {
                 //Расстояние между блоками 'Tile' на форме по горизонтали(в строке), 
@@ -291,27 +316,19 @@ namespace FinanceManager.Modules
                 byte horisontalOffset = 20;
 
                 //Расстояние между блоками 'Tile' на форме по вертикали(т.е. между строками)
-                byte verticalOffset   = 20;
+                byte verticalOffset = 20;
 
-                //Перерисовка/пересчитывание расположения элементов 'Tile' на форме
-                CountTileInRow = (byte)Math.Ceiling(Page.Width / (184f + 85)); //+ 50));
-                byte CountRows      = (byte)Math.Ceiling(Page.Height / 136f);
-                byte TileIndex      = 0; //Индекс элемента, положение которого выставляется
-                 
-
-                //Высота для каждого блока и расстояний между блоками
-                //GlavnForm.Height = (CountRows * 136) + (CountRows * verticalOffset);
-
-                //ONLY DEBUG
-                //MessageBox.Show($"Для размеров формы {GlavnForm.Width},{GlavnForm.Height}\nСтрок {CountRows}\nЭлементов в строке {CountTileInRow}");
+                CountTileInRow = (byte)Math.Ceiling(BankAccountsPage.Width / (184f + 85));//Количество элементов в строке
+                byte CountRows = (byte)Math.Ceiling(BankAccountsPage.Height / 136f); //Количество строк
+                byte TileIndex = 0; //Индекс элемента, положение которого выставляется
 
 
                 int Y = 18; //Координата по Y для строки
                 for (byte Row = 0; Row < CountRows && TileIndex < TileList.Count; Row++)
                 {
-                    for(byte TileNumber = 0; TileNumber < CountTileInRow && TileIndex < TileList.Count; TileNumber++)
+                    for (byte TileNumber = 0; TileNumber < CountTileInRow && TileIndex < TileList.Count; TileNumber++)
                     {
-                        int X = ((horisontalOffset * TileNumber+1) + (TileNumber * 184)); //Координата по X для этого элемента
+                        int X = ((horisontalOffset * TileNumber + 1) + (TileNumber * 184)); //Координата по X для этого элемента
 
                         TileList[TileIndex].Location = new System.Drawing.Point(X, Y);
                         TileIndex++;
@@ -325,8 +342,110 @@ namespace FinanceManager.Modules
             }
         }
 
+
+
+        ///<summary>
+        /// Класс, для работы с элементами Tile вкладки банковских счетов
+        /// </summary>
+        public static class PlasticCardsTab
+        {
+            private static List<MetroTile> TileList = new List<MetroTile>();
+
+            /// <summary>
+            /// Удалить элемент Tile и пересчитать расположение их на форме
+            /// </summary>
+            /// <param name="tile"></param>
+            public static void DeleteTile(MetroTile tile)
+            {
+                PlasticCardsPage.Controls.Remove(tile);
+                TileList.Remove(tile);
+                RePaint();
+            }
+
+
+            /// <summary>
+            ///    Добавление элемента Tile на форму и в лист
+            /// </summary>
+            public static MetroTile AddTile(string TileText)
+            {
+                MetroTile newTile = new MetroTile();
+
+                newTile.ActiveControl = null;
+                newTile.Location = new System.Drawing.Point(0, 0);
+                newTile.Name = "PMetroTile" + (TileList.Count + 1).ToString();
+                newTile.Size = new System.Drawing.Size(184, 136);
+                newTile.TabIndex = TileList.Count + 1;
+                newTile.Text = TileText;
+                newTile.Theme = BankAccountsPage.Theme;
+                newTile.TileImage = global::FinanceManager.Properties.Resources.Coins;
+                newTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+                newTile.UseSelectable = true;
+                newTile.UseTileImage = true;
+                newTile.MouseMove += GlavnForm.MouseOnTile;
+
+
+                PlasticCardsPage.Controls.Add(newTile);
+                TileList.Add(newTile);
+
+                RePaint();
+
+                return newTile;
+            }
+
+
+            //Хранит в себе количество элементов в строке ДО изменения размера окна пользователем
+            private static byte CountTileInRow = 0;
+
+            /// <summary>
+            ///     Нужно ли перерисовывать элементы Tile на вкладке
+            /// </summary>
+            public static bool RePaintAvailable()
+            {
+                if ((byte)Math.Ceiling(PlasticCardsPage.Width / (184f + 85)) != CountTileInRow) return true;
+                return false;
+            }
+
+            /// <summary>
+            /// Перерисовка расположения элементов Tile на вкладке
+            /// </summary>
+            public static void RePaint()
+            {
+                //Расстояние между блоками 'Tile' на форме по горизонтали(в строке), 
+                //ОТСТУП ТАК ЖЕ ПРИМЕНЯЕТСЯ ДЛЯ ПЕРВОГО ЭЛЕМЕНТА В СТРОКЕ
+                byte horisontalOffset = 20;
+
+                //Расстояние между блоками 'Tile' на форме по вертикали(т.е. между строками)
+                byte verticalOffset = 20;
+
+                CountTileInRow = (byte)Math.Ceiling(PlasticCardsPage.Width / (184f + 85));//Количество элементов в строке
+                byte CountRows = (byte)Math.Ceiling(PlasticCardsPage.Height / 136f); //Количество строк
+                byte TileIndex = 0; //Индекс элемента, положение которого выставляется
+
+
+                int Y = 18; //Координата по Y для строки
+                for (byte Row = 0; Row < CountRows && TileIndex < TileList.Count; Row++)
+                {
+                    for (byte TileNumber = 0; TileNumber < CountTileInRow && TileIndex < TileList.Count; TileNumber++)
+                    {
+                        int X = ((horisontalOffset * TileNumber + 1) + (TileNumber * 184)); //Координата по X для этого элемента
+
+                        TileList[TileIndex].Location = new System.Drawing.Point(X, Y);
+                        TileIndex++;
+                    }
+
+                    Y += verticalOffset + 136;
+                }
+            }
+        }
     }
-    
+
+
+
+
+
+
+
+
 
     /// <summary>
     /// Класс, для работы с внешней базой данных 
