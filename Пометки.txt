@@ -95,7 +95,7 @@
 		<CardNumber>4255 2003 ....</CardNumber>
 		<date>07/24</date>
 		<currency>BYN</currency>
-		<summa>240,42</summa>
+		<Amount>240,42</Amount>
 	</account>
 
 

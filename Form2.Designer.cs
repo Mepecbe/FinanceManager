@@ -37,7 +37,6 @@
             this.добавитьСчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьСчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PlasticCardsPage = new MetroFramework.Controls.MetroTabPage();
-            this.metroTile2 = new MetroFramework.Controls.MetroTile();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
             this.metroTabPage4 = new MetroFramework.Controls.MetroTabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -55,7 +54,6 @@
             this.tabPage2.SuspendLayout();
             this.metroTabControl2.SuspendLayout();
             this.BankAccountsContext.SuspendLayout();
-            this.PlasticCardsPage.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.metroTabControl1.SuspendLayout();
             this.PlasticCardContextMenu.SuspendLayout();
@@ -131,7 +129,7 @@
             // 
             // PlasticCardsPage
             // 
-            this.PlasticCardsPage.Controls.Add(this.metroTile2);
+            this.PlasticCardsPage.ContextMenuStrip = this.PlasticCardContextMenu;
             this.PlasticCardsPage.HorizontalScrollbarBarColor = true;
             this.PlasticCardsPage.HorizontalScrollbarHighlightOnWheel = false;
             this.PlasticCardsPage.HorizontalScrollbarSize = 10;
@@ -143,19 +141,6 @@
             this.PlasticCardsPage.VerticalScrollbarBarColor = true;
             this.PlasticCardsPage.VerticalScrollbarHighlightOnWheel = false;
             this.PlasticCardsPage.VerticalScrollbarSize = 10;
-            // 
-            // metroTile2
-            // 
-            this.metroTile2.ActiveControl = null;
-            this.metroTile2.Location = new System.Drawing.Point(17, 19);
-            this.metroTile2.Name = "metroTile2";
-            this.metroTile2.Size = new System.Drawing.Size(183, 136);
-            this.metroTile2.TabIndex = 3;
-            this.metroTile2.Text = "Карт бланш";
-            this.metroTile2.TileImage = global::FinanceManager.Properties.Resources.icon__0031s_0000_Compound_Shape;
-            this.metroTile2.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.metroTile2.UseSelectable = true;
-            this.metroTile2.UseTileImage = true;
             // 
             // metroTabPage3
             // 
@@ -267,6 +252,7 @@
             this.добавитьПластиковуюКартуToolStripMenuItem.Name = "добавитьПластиковуюКартуToolStripMenuItem";
             this.добавитьПластиковуюКартуToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.добавитьПластиковуюКартуToolStripMenuItem.Text = "Добавить пластиковую карту";
+            this.добавитьПластиковуюКартуToolStripMenuItem.Click += new System.EventHandler(this.добавитьПластиковуюКартуToolStripMenuItem_Click);
             // 
             // удалитьПластиковуюКартуToolStripMenuItem
             // 
@@ -290,7 +276,6 @@
             this.tabPage2.ResumeLayout(false);
             this.metroTabControl2.ResumeLayout(false);
             this.BankAccountsContext.ResumeLayout(false);
-            this.PlasticCardsPage.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.metroTabControl1.ResumeLayout(false);
             this.PlasticCardContextMenu.ResumeLayout(false);
@@ -313,7 +298,6 @@
         private MetroFramework.Controls.MetroTabPage PlasticCardsPage;
         private MetroFramework.Controls.MetroTabPage metroTabPage3;
         private MetroFramework.Controls.MetroTabPage metroTabPage4;
-        private MetroFramework.Controls.MetroTile metroTile2;
         private MetroFramework.Controls.MetroContextMenu BankAccountsContext;
         private System.Windows.Forms.ToolStripMenuItem добавитьСчетToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьСчетToolStripMenuItem;

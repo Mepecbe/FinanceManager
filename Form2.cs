@@ -21,7 +21,9 @@ namespace FinanceManager
         {
             InitializeComponent();
 
-            TileManager.Page = this.BankAccountsPage;
+            TileManager.BankAccountsPage = this.BankAccountsPage;
+            TileManager.PlasticCardsPage = this.PlasticCardsPage;
+
             TileManager.GlavnForm = this;
             Accounts.Init();          
         }
@@ -60,6 +62,11 @@ namespace FinanceManager
             {
                 TileManager.BankAccountsTab.RePaint();
             }
+
+            if (TileManager.PlasticCardsTab.RePaintAvailable())
+            {
+                TileManager.PlasticCardsTab.RePaint();
+            }
         }
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
@@ -76,6 +83,23 @@ namespace FinanceManager
         private void удалитьСчетToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Accounts.BankAccounts.DeleteAccount(this.tile);
+        }
+
+        private void добавитьПластиковуюКартуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddPlasticCard addCardForm = new AddPlasticCard();
+
+            //Добавление банковских счетов
+            for(int index = 0; index < Accounts.List_BankAccounts.Count; index++)
+                addCardForm.ComboBoxAccountNumber.Items.Add(Accounts.List_BankAccounts[index].AccountNumber);
+            
+            //Добавление валют
+            for(CurrencyType currency = 0; currency <= CurrencyType.RUB; currency++)
+                addCardForm.CardCurrency.Items.Add(currency);
+                        
+            addCardForm.ShowDialog();
+
+            TileManager.PlasticCardsTab.AddTile(addCardForm.CardName.Text);
         }
     }
 }
