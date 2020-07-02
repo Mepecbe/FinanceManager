@@ -100,6 +100,7 @@ namespace FinanceManager.Modules
                             newCard.AccountAmount = float.Parse(node.ChildNodes[6].InnerText);
 
                             List_PlasticCards.Add(newCard);
+                            TileManager.PlasticCardsTab.AddTile(newCard.Name);
                             break;
                         }
 
@@ -193,11 +194,6 @@ namespace FinanceManager.Modules
 
                         for (int XmlChildIndex = 0; XmlChildIndex < XmlAccountsDocument.DocumentElement.ChildNodes.Count; XmlChildIndex++)
                         {
-                            string dd = XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].InnerText;
-
-                            string a = XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].Attributes["type"].Value;
-                            string b = XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].ChildNodes[0].InnerText;
-
                             if (XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].Attributes["type"].Value == "Bank"
                                 && XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].ChildNodes[0].InnerText == tile.Text)
                             {
@@ -216,15 +212,90 @@ namespace FinanceManager.Modules
 
 
         public static class PlasticCards
-        {
-            public static void AddPlasticCard()
+        {            
+            public static void AddPlasticCard(string name, string BankAccount, string CardHolder, string CardNumber, string Date, CurrencyType currency, float Amount)
             {
+                PlasticCard newPlasticCard = new PlasticCard();
 
+                {
+                    newPlasticCard.Name = name;
+                    newPlasticCard.BankAccount = BankAccount;
+                    newPlasticCard.CardHolder = CardHolder;
+                    newPlasticCard.CardNumber = CardNumber;
+                    newPlasticCard.Date = Date;
+                    newPlasticCard.Currency = currency;
+                    newPlasticCard.AccountAmount = Amount;
+
+                    List_PlasticCards.Add(newPlasticCard);
+                }
+
+
+                {
+                    //Добавление в XML файл
+                    XmlElement xmlAccount = XmlAccountsDocument.CreateElement("account");
+                    XmlAttribute attributeType = XmlAccountsDocument.CreateAttribute("type");
+                                 attributeType.Value = "PlasticCard";
+
+                    xmlAccount.Attributes.Append(attributeType);
+
+                    XmlElement XmlName = XmlAccountsDocument.CreateElement("name");
+                               XmlName.InnerText = newPlasticCard.Name;
+
+                    XmlElement XmlBankAccount = XmlAccountsDocument.CreateElement("BankAccount");
+                               XmlBankAccount.InnerText = newPlasticCard.BankAccount;
+
+                    XmlElement XmlCardHolder = XmlAccountsDocument.CreateElement("CardHolder");
+                               XmlCardHolder.InnerText = newPlasticCard.CardHolder;
+
+                    XmlElement XmlCardNumber = XmlAccountsDocument.CreateElement("CardNumber");
+                               XmlCardNumber.InnerText = newPlasticCard.CardNumber;
+
+                    XmlElement XmlDate = XmlAccountsDocument.CreateElement("date");
+                               XmlDate.InnerText = newPlasticCard.Date;
+
+                    XmlElement XmlCurrency = XmlAccountsDocument.CreateElement("currency");
+                               XmlCurrency.InnerText = newPlasticCard.Currency.ToString();
+
+                    XmlElement XmlAmount = XmlAccountsDocument.CreateElement("Amount");
+                               XmlAmount.InnerText = newPlasticCard.AccountAmount.ToString();
+
+                    xmlAccount.AppendChild(XmlName);
+                    xmlAccount.AppendChild(XmlBankAccount);
+                    xmlAccount.AppendChild(XmlCardHolder);
+                    xmlAccount.AppendChild(XmlCardNumber);
+                    xmlAccount.AppendChild(XmlDate);
+                    xmlAccount.AppendChild(XmlCurrency);
+                    xmlAccount.AppendChild(XmlAmount);
+
+                    XmlAccountsDocument.DocumentElement.AppendChild(xmlAccount);
+                }
             }
 
-            public static void DeletePlasticCard()
+            public static void DeleteAccount(MetroFramework.Controls.MetroTile tile)
             {
+                if (tile == null) return;
 
+                for (int index = 0; index < List_PlasticCards.Count; index++)
+                {
+                    if (List_PlasticCards[index].Name == tile.Text)
+                    {
+                        List_PlasticCards.RemoveAt(index);
+
+                        for (int XmlChildIndex = 0; XmlChildIndex < XmlAccountsDocument.DocumentElement.ChildNodes.Count; XmlChildIndex++)
+                        {
+                            if (XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].Attributes["type"].Value == "PlasticCard"
+                                && XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex].ChildNodes[0].InnerText == tile.Text)
+                            {
+                                XmlAccountsDocument.DocumentElement.RemoveChild(XmlAccountsDocument.DocumentElement.ChildNodes[XmlChildIndex]);
+                                break;
+                            }
+                        }
+
+                        break;
+                    }
+                }
+
+                TileManager.PlasticCardsTab.DeleteTile(tile);
             }
         }
 
@@ -377,7 +448,7 @@ namespace FinanceManager.Modules
                 newTile.TabIndex = TileList.Count + 1;
                 newTile.Text = TileText;
                 newTile.Theme = BankAccountsPage.Theme;
-                newTile.TileImage = global::FinanceManager.Properties.Resources.Coins;
+                newTile.TileImage = global::FinanceManager.Properties.Resources.PlasticCard;
                 newTile.TileImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
                 newTile.UseSelectable = true;
                 newTile.UseTileImage = true;

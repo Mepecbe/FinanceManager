@@ -90,16 +90,38 @@ namespace FinanceManager
             AddPlasticCard addCardForm = new AddPlasticCard();
 
             //Добавление банковских счетов
-            for(int index = 0; index < Accounts.List_BankAccounts.Count; index++)
+            for (int index = 0; index < Accounts.List_BankAccounts.Count; index++)
                 addCardForm.ComboBoxAccountNumber.Items.Add(Accounts.List_BankAccounts[index].AccountNumber);
-            
+
             //Добавление валют
-            for(CurrencyType currency = 0; currency <= CurrencyType.RUB; currency++)
+            for (CurrencyType currency = 0; currency <= CurrencyType.RUB; currency++)
                 addCardForm.CardCurrency.Items.Add(currency);
-                        
+
             addCardForm.ShowDialog();
 
-            TileManager.PlasticCardsTab.AddTile(addCardForm.CardName.Text);
+            CurrencyType CardCurrency = CurrencyType.USD;
+            Enum.TryParse(addCardForm.CardCurrency.Text, out CardCurrency);
+
+            if (addCardForm.OK)
+            {
+                Accounts.PlasticCards.AddPlasticCard(
+                    addCardForm.CardName.Text,
+                    addCardForm.AccountNotSaved.Checked ? addCardForm.TextBox_AccountNumber.Text : addCardForm.ComboBoxAccountNumber.Text,
+                    addCardForm.CardHolder.Text,
+                    addCardForm.CardNumber.Text,
+                    addCardForm.CardDate.Text,
+                    CardCurrency,
+                    float.Parse(addCardForm.Amount.Text)       
+                );
+
+                TileManager.PlasticCardsTab.AddTile(addCardForm.CardName.Text);
+            
+            }
+        }
+
+        private void удалитьПластиковуюКартуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Accounts.PlasticCards.DeleteAccount(tile);
         }
     }
 }

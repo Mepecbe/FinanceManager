@@ -402,6 +402,6 @@
         public MetroFramework.Controls.MetroComboBox ComboBoxAccountNumber;
         public MetroFramework.Controls.MetroCheckBox AccountNotSaved;
         public MetroFramework.Controls.MetroComboBox CardCurrency;
-        private MetroFramework.Controls.MetroTextBox TextBox_AccountNumber;
+        public MetroFramework.Controls.MetroTextBox TextBox_AccountNumber;
     }
 }
