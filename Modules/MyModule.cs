@@ -17,6 +17,9 @@ namespace FinanceManager.Modules
     /// </summary>
     public static class Operations
     {
+        private static XmlDocument XmlOperationsDocument = new XmlDocument();
+        private static List<Operation> List_Operations = new List<Operation>();
+
         public static void Init()
         {
             if (!File.Exists(Properties.Resources.OperationsFile))
@@ -25,6 +28,26 @@ namespace FinanceManager.Modules
                 fileWriter.WriteLine("<?xml version=\"1.0\"?>\n<operations>\n</operations>>  ");
                 fileWriter.Close();
                 return;
+            }
+
+            XmlOperationsDocument.LoadXml(Properties.Resources.OperationsFile);
+            
+            foreach(XmlElement element in XmlOperationsDocument.DocumentElement)
+            {
+                Operation newOperation = new Operation();
+                newOperation.OperationNumber = UInt16.Parse(element.ChildNodes[0].InnerText);
+                newOperation.OperationName = element.ChildNodes[1].InnerText;
+                newOperation.From = element.ChildNodes[2].InnerText;
+                newOperation.To = element.ChildNodes[3].InnerText;
+                newOperation.Sum = decimal.Parse(element.ChildNodes[4].InnerText);
+                
+                CurrencyType currency = CurrencyType.USD;
+                Enum.TryParse(element.ChildNodes[5].InnerText, out currency);
+
+                newOperation.Currency = currency;
+                newOperation.Balance = decimal.Parse(element.ChildNodes[6].InnerText);
+
+                List_Operations.Add(newOperation);
             }
         }
 
@@ -65,23 +88,20 @@ namespace FinanceManager.Modules
                 fileWriter.Close();
                 return;
             }
-
-
+            
             XmlAccountsDocument.Load(Properties.Resources.AccountsFile);
-
-            XmlElement rootXmlAccountsDocument = XmlAccountsDocument.DocumentElement;
-            foreach (XmlNode node in rootXmlAccountsDocument)
+            
+            foreach (XmlNode node in XmlAccountsDocument.DocumentElement)
             {
                 switch (node.Attributes["type"].Value)
                 {
-
                     case "Bank":
                         {
                             BankAccount newAccount = new BankAccount();
                             newAccount.AccountName = node.ChildNodes[0].InnerText;
                             newAccount.AccountNumber = node.ChildNodes[1].InnerText;
                             Enum.TryParse(node.ChildNodes[2].InnerText, out newAccount.Currency);
-                            newAccount.AccountAmount = float.Parse(node.ChildNodes[3].InnerText);
+                            newAccount.AccountAmount = decimal.Parse(node.ChildNodes[3].InnerText);
 
                             List_BankAccounts.Add(newAccount);
                             TileManager.BankAccountsTab.AddTile(newAccount.AccountName);
@@ -97,7 +117,7 @@ namespace FinanceManager.Modules
                             newCard.CardNumber = node.ChildNodes[3].InnerText;
                             newCard.Date = node.ChildNodes[4].InnerText;
                             Enum.TryParse(node.ChildNodes[5].InnerText, out newCard.Currency);
-                            newCard.AccountAmount = float.Parse(node.ChildNodes[6].InnerText);
+                            newCard.AccountAmount = decimal.Parse(node.ChildNodes[6].InnerText);
 
                             List_PlasticCards.Add(newCard);
                             TileManager.PlasticCardsTab.AddTile(newCard.Name);
@@ -122,7 +142,7 @@ namespace FinanceManager.Modules
                             OtherAccount newOtherAccount = new OtherAccount();
                             newOtherAccount.AccountName = node.ChildNodes[0].InnerText;
                             Enum.TryParse(node.ChildNodes[1].InnerText, out newOtherAccount.Currency);
-                            newOtherAccount.AccountAmount = float.Parse(node.ChildNodes[2].InnerText);
+                            newOtherAccount.AccountAmount = decimal.Parse(node.ChildNodes[2].InnerText);
 
                             List_OtherAccounts.Add(newOtherAccount);
                             break;
@@ -136,7 +156,7 @@ namespace FinanceManager.Modules
         /// </summary>
         public static class BankAccounts
         {
-            public static void AddBankAccount(string AccountName, string AccountNumber, CurrencyType Currency, float AccountAmount)
+            public static void AddBankAccount(string AccountName, string AccountNumber, CurrencyType Currency, decimal AccountAmount)
             {
                 {
                     //Добавление в лист счетов
@@ -213,7 +233,7 @@ namespace FinanceManager.Modules
 
         public static class PlasticCards
         {            
-            public static void AddPlasticCard(string name, string BankAccount, string CardHolder, string CardNumber, string Date, CurrencyType currency, float Amount)
+            public static void AddPlasticCard(string name, string BankAccount, string CardHolder, string CardNumber, string Date, CurrencyType currency, decimal Amount)
             {
                 PlasticCard newPlasticCard = new PlasticCard();
 

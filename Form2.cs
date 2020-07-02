@@ -51,7 +51,7 @@ namespace FinanceManager
                     addBankAccountForm.AccountName.Text,
                     addBankAccountForm.AccountNumber.Text,
                     type,
-                    float.Parse(addBankAccountForm.SummOnAccount.Text)
+                    decimal.Parse(addBankAccountForm.SummOnAccount.Text)
                 );
             }
         }
@@ -111,11 +111,10 @@ namespace FinanceManager
                     addCardForm.CardNumber.Text,
                     addCardForm.CardDate.Text,
                     CardCurrency,
-                    float.Parse(addCardForm.Amount.Text)       
+                    decimal.Parse(addCardForm.Amount.Text)       
                 );
 
-                TileManager.PlasticCardsTab.AddTile(addCardForm.CardName.Text);
-            
+                TileManager.PlasticCardsTab.AddTile(addCardForm.CardName.Text);            
             }
         }
 

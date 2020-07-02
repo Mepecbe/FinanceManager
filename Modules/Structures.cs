@@ -6,21 +6,13 @@ using System.Threading.Tasks;
 using FinanceManager.Modules.Enums;
 
 namespace FinanceManager.Modules.Structures
-{
-
-    public struct OtherAccount
-    {
-        public string AccountName;
-        public float AccountAmount;
-        public CurrencyType Currency;
-    }
-
+{   
     public struct BankAccount
     {
         public string AccountName;
         public string BankName;
         public string AccountNumber;
-        public float AccountAmount;
+        public decimal AccountAmount;
         public CurrencyType Currency;
 
         public MetroFramework.Controls.MetroTile AccountFormTile;
@@ -33,7 +25,7 @@ namespace FinanceManager.Modules.Structures
         public string CardHolder;
         public string CardNumber;
         public string Date;
-        public float AccountAmount;
+        public decimal AccountAmount;
         public CurrencyType Currency;
 
         public MetroFramework.Controls.MetroTile AccountFormTile;
@@ -48,5 +40,23 @@ namespace FinanceManager.Modules.Structures
         public CryptoCurrencyType CryptoCurrency;
 
         public MetroFramework.Controls.MetroTile AccountFormTile;
+    }
+
+    public struct OtherAccount
+    {
+        public string AccountName;
+        public decimal AccountAmount;
+        public CurrencyType Currency;
+    }
+
+    public struct Operation
+    {
+        public UInt32 OperationNumber;
+        public string OperationName;
+        public string From;
+        public string To;
+        public decimal Sum;
+        public CurrencyType Currency;
+        public decimal Balance; //Остаток
     }
 }
