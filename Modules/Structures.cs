@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using FinanceManager.Modules.Enums;
 
 namespace FinanceManager.Modules.Structures
@@ -57,6 +58,6 @@ namespace FinanceManager.Modules.Structures
         public string To;
         public decimal Sum;
         public CurrencyType Currency;
-        public decimal Balance; //Остаток
+        public decimal Balance; //Остаток 
     }
 }

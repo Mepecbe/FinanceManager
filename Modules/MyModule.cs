@@ -27,7 +27,6 @@ namespace FinanceManager.Modules
                 StreamWriter fileWriter = File.CreateText(Properties.Resources.OperationsFile);
                 fileWriter.WriteLine("<?xml version=\"1.0\"?>\n<operations>\n</operations>>  ");
                 fileWriter.Close();
-                return;
             }
 
             XmlOperationsDocument.LoadXml(Properties.Resources.OperationsFile);
@@ -51,9 +50,23 @@ namespace FinanceManager.Modules
             }
         }
 
-        public static void AddOperation()
+        private static UInt32 GetNewOperationNumber()
         {
+            return 1 + (UInt32)List_Operations.Count;
+        }
 
+        public static void AddOperation(string name, string from, string to, decimal sum, CurrencyType currency)
+        {
+            Operation newOperation = new Operation()
+            {
+                OperationNumber = GetNewOperationNumber(),
+                OperationName = name,
+                From = from,
+                To = to,
+                Sum = sum,
+                Currency = currency,
+                Balance = (decimal)9999.9       //БАЛАНС, ОСТАТОК НА СЧЕТУ
+            };
         }
 
 
@@ -86,7 +99,6 @@ namespace FinanceManager.Modules
                 StreamWriter fileWriter = File.CreateText(Properties.Resources.AccountsFile);
                 fileWriter.WriteLine("<?xml version=\"1.0\"?>\n<accounts>\n</accounts>  ");
                 fileWriter.Close();
-                return;
             }
             
             XmlAccountsDocument.Load(Properties.Resources.AccountsFile);
@@ -160,12 +172,13 @@ namespace FinanceManager.Modules
             {
                 {
                     //Добавление в лист счетов
-                    BankAccount NewBankAccount = new BankAccount();
-
-                    NewBankAccount.AccountName = AccountName;
-                    NewBankAccount.AccountNumber = AccountNumber;
-                    NewBankAccount.Currency = Currency;
-                    NewBankAccount.AccountAmount = AccountAmount;
+                    BankAccount NewBankAccount = new BankAccount()
+                    {
+                        AccountName = AccountName,
+                        AccountNumber = AccountNumber,
+                        Currency = Currency,
+                        AccountAmount = AccountAmount
+                    };
 
                     List_BankAccounts.Add(NewBankAccount);
                 }
@@ -235,19 +248,19 @@ namespace FinanceManager.Modules
         {            
             public static void AddPlasticCard(string name, string BankAccount, string CardHolder, string CardNumber, string Date, CurrencyType currency, decimal Amount)
             {
-                PlasticCard newPlasticCard = new PlasticCard();
-
+                PlasticCard newPlasticCard = new PlasticCard()
                 {
-                    newPlasticCard.Name = name;
-                    newPlasticCard.BankAccount = BankAccount;
-                    newPlasticCard.CardHolder = CardHolder;
-                    newPlasticCard.CardNumber = CardNumber;
-                    newPlasticCard.Date = Date;
-                    newPlasticCard.Currency = currency;
-                    newPlasticCard.AccountAmount = Amount;
-
-                    List_PlasticCards.Add(newPlasticCard);
-                }
+                    Name = name,
+                    BankAccount = BankAccount,
+                    CardHolder = CardHolder,
+                    CardNumber = CardNumber,
+                    Date = Date,
+                    Currency = currency,
+                    AccountAmount = Amount
+                };
+               
+                List_PlasticCards.Add(newPlasticCard);
+                
 
 
                 {
@@ -473,8 +486,7 @@ namespace FinanceManager.Modules
                 newTile.UseSelectable = true;
                 newTile.UseTileImage = true;
                 newTile.MouseMove += GlavnForm.MouseOnTile;
-
-
+                
                 PlasticCardsPage.Controls.Add(newTile);
                 TileList.Add(newTile);
 

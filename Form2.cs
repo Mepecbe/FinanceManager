@@ -122,5 +122,11 @@ namespace FinanceManager
         {
             Accounts.PlasticCards.DeleteAccount(tile);
         }
+
+        private void добавитьОперациюToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddOperation operation = new AddOperation();
+            operation.ShowDialog();
+        }
     }
 }

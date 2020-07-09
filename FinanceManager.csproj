@@ -64,6 +64,12 @@
     <Compile Include="AddBankAccount.Designer.cs">
       <DependentUpon>AddBankAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddOperation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddOperation.Designer.cs">
+      <DependentUpon>AddOperation.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddPlasticCard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +95,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AddBankAccount.resx">
       <DependentUpon>AddBankAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddOperation.resx">
+      <DependentUpon>AddOperation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddPlasticCard.resx">
       <DependentUpon>AddPlasticCard.cs</DependentUpon>

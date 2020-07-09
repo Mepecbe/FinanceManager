@@ -215,6 +215,7 @@
             this.columnHeader3,
             this.columnHeader4,
             this.columnHeader5});
+            this.OperationsList.ContextMenuStrip = this.OperationsContextMenu;
             this.OperationsList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OperationsList.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.OperationsList.FullRowSelect = true;
@@ -260,7 +261,7 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 1;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(760, 347);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
@@ -273,13 +274,14 @@
             this.добавитьОперациюToolStripMenuItem,
             this.удалитьОперациюToolStripMenuItem});
             this.OperationsContextMenu.Name = "OperationsContextMenu";
-            this.OperationsContextMenu.Size = new System.Drawing.Size(187, 70);
+            this.OperationsContextMenu.Size = new System.Drawing.Size(187, 48);
             // 
             // добавитьОперациюToolStripMenuItem
             // 
             this.добавитьОперациюToolStripMenuItem.Name = "добавитьОперациюToolStripMenuItem";
             this.добавитьОперациюToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.добавитьОперациюToolStripMenuItem.Text = "Добавить операцию";
+            this.добавитьОперациюToolStripMenuItem.Click += new System.EventHandler(this.добавитьОперациюToolStripMenuItem_Click);
             // 
             // удалитьОперациюToolStripMenuItem
             // 
