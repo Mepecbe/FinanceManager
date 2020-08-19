@@ -25,7 +25,8 @@ namespace FinanceManager
             TileManager.PlasticCardsPage = this.PlasticCardsPage;
 
             TileManager.GlavnForm = this;
-            Accounts.Init();          
+            Accounts.Init();
+            Operations.Init();
         }
 
         private void Form2_Resize(object sender, EventArgs e)
@@ -72,6 +73,7 @@ namespace FinanceManager
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
             Accounts.SaveAll();
+            Operations.SaveAll();
         }
 
         public MetroFramework.Controls.MetroTile tile;
@@ -127,6 +129,22 @@ namespace FinanceManager
         {
             AddOperation operation = new AddOperation();
             operation.ShowDialog();
+        }
+
+        private void удалитьОперациюToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.OperationsList.SelectedItems.Count == 0) return;
+
+            if(MetroFramework.MetroMessageBox.Show(this,"Вы уверены что хотите удалить операцию?", "Внимание", MessageBoxButtons.YesNo) == DialogResult.No)
+            {
+                return;
+            }
+
+            foreach(ListViewItem item in this.OperationsList.SelectedItems)
+            {
+                Operations.DeleteOperation(item.Text);
+                item.Remove();
+            }
         }
     }
 }

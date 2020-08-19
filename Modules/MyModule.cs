@@ -25,13 +25,13 @@ namespace FinanceManager.Modules
             if (!File.Exists(Properties.Resources.OperationsFile))
             {
                 StreamWriter fileWriter = File.CreateText(Properties.Resources.OperationsFile);
-                fileWriter.WriteLine("<?xml version=\"1.0\"?>\n<operations>\n</operations>>  ");
+                fileWriter.WriteLine("<?xml version=\"1.0\"?>\n<operations>\n</operations>  ");
                 fileWriter.Close();
             }
 
-            XmlOperationsDocument.LoadXml(Properties.Resources.OperationsFile);
-            
-            foreach(XmlElement element in XmlOperationsDocument.DocumentElement)
+            XmlOperationsDocument.Load(Properties.Resources.OperationsFile);
+
+            foreach (XmlElement element in XmlOperationsDocument.DocumentElement)
             {
                 Operation newOperation = new Operation();
                 newOperation.OperationNumber = UInt16.Parse(element.ChildNodes[0].InnerText);
@@ -47,6 +47,13 @@ namespace FinanceManager.Modules
                 newOperation.Balance = decimal.Parse(element.ChildNodes[6].InnerText);
 
                 List_Operations.Add(newOperation);
+
+                /*В табличку на форме*/
+                ListViewItem OperationItem = TileManager.GlavnForm.OperationsList.Items.Add(newOperation.OperationNumber.ToString());
+                OperationItem.SubItems.Add(newOperation.OperationName);
+                OperationItem.SubItems.Add(newOperation.From);
+                OperationItem.SubItems.Add(newOperation.To);
+                OperationItem.SubItems.Add(newOperation.Sum.ToString());
             }
         }
 
@@ -67,12 +74,62 @@ namespace FinanceManager.Modules
                 Currency = currency,
                 Balance = (decimal)9999.9       //БАЛАНС, ОСТАТОК НА СЧЕТУ
             };
+
+            List_Operations.Add(newOperation);
+
+            XmlElement XmlOperation    = XmlOperationsDocument.CreateElement("operation");
+
+            XmlElement OperationNumber = XmlOperationsDocument.CreateElement("number");
+            XmlElement OperationName   = XmlOperationsDocument.CreateElement("name");
+            XmlElement From            = XmlOperationsDocument.CreateElement("from");
+            XmlElement To              = XmlOperationsDocument.CreateElement("to");
+            XmlElement Summ            = XmlOperationsDocument.CreateElement("Summ");
+            XmlElement Currency        = XmlOperationsDocument.CreateElement("currency");
+            XmlElement Balance         = XmlOperationsDocument.CreateElement("balance");
+
+            OperationNumber.InnerText = newOperation.OperationNumber.ToString();
+            OperationName.InnerText = newOperation.OperationName;
+            From.InnerText = newOperation.From;
+            To.InnerText = newOperation.To;
+            Summ.InnerText = newOperation.Sum.ToString();
+            Currency.InnerText = newOperation.Currency.ToString();
+            Balance.InnerText = newOperation.Balance.ToString();
+
+            XmlOperation.AppendChild(OperationNumber);
+            XmlOperation.AppendChild(OperationName);
+            XmlOperation.AppendChild(From);
+            XmlOperation.AppendChild(To);
+            XmlOperation.AppendChild(Summ);
+            XmlOperation.AppendChild(Currency);
+            XmlOperation.AppendChild(Balance);
+
+            XmlOperationsDocument.DocumentElement.AppendChild(XmlOperation);
+
+            //Добавление на форму
+            ListViewItem item = TileManager.GlavnForm.OperationsList.Items.Add(newOperation.OperationNumber.ToString());
+            item.SubItems.Add(newOperation.OperationName);
+            item.SubItems.Add(newOperation.From);
+            item.SubItems.Add(newOperation.To);
+            item.SubItems.Add(newOperation.Sum.ToString());
         }
 
 
-        public static void DeleteOperation()
+        public static void DeleteOperation(string number)
         {
+            //Удаление из XML документа
+            foreach (XmlElement operation in XmlOperationsDocument.DocumentElement)
+            {
+                if (operation.ChildNodes[0].InnerText == number)
+                {
+                    XmlOperationsDocument.DocumentElement.RemoveChild(operation);
+                    break;
+                }
+            }
+        }
 
+        public static void SaveAll()
+        {
+            XmlOperationsDocument.Save("operations.xml");
         }
     }
 
@@ -500,7 +557,7 @@ namespace FinanceManager.Modules
             private static byte CountTileInRow = 0;
 
             /// <summary>
-            ///     Нужно ли перерисовывать элементы Tile на вкладке
+            ///     Возвращает True, если количество элементов на форме не совпадает количеством элементов, которое можно сейчас нарисовать на форме
             /// </summary>
             public static bool RePaintAvailable()
             {

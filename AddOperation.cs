@@ -37,6 +37,17 @@ namespace FinanceManager
         private void AddButton_Click(object sender, EventArgs e)
         {
             //Добавить
+            CurrencyType type = CurrencyType.BYN;
+            Enum.TryParse<CurrencyType>(CurrencyComboBox.Text, out type);
+
+            Operations.AddOperation(this.OperationName.Text,
+                                    this.FromComboBox.Text,
+                                    this.ToAccountComboBox.Text,
+                                    decimal.Parse(SummaTextBox.Text),
+                                    type);
+
+            MetroFramework.MetroMessageBox.Show(this, "Операция добавлена!");
+            this.Close();
         }
 
 
