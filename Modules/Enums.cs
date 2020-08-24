@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace FinanceManager.Modules.Enums
 {
-    public enum CurrencyType
+    public enum CurrencyType : byte
     {
-        USD,
-        BYN,
-        EUR,
-        RUB
+        USD = 0,
+        BYN = 1,
+        EUR = 2,
+        RUB = 3
     }
 
     public enum CryptoCurrencyType
     {
-        BTC, //Bitcoin
-        ETH, //Ethereum
-        ZCASH 
+        BTC   = 0, //Bitcoin
+        ETH   = 1, //Ethereum
+        ZCASH = 2 
     }
 }

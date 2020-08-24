@@ -17,7 +17,7 @@ namespace FinanceManager
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new AuthForm());
-            Application.Run(new Form2()); //ДЛЯ ОТЛАДКИ
+            Application.Run(new Explorer()); //ДЛЯ ОТЛАДКИ
         }
     }
 }

@@ -9,6 +9,7 @@ using FinanceManager.Modules.Enums;
 using FinanceManager.Modules.Structures;
 
 using MetroFramework.Controls;
+using System.Text;
 
 namespace FinanceManager.Modules
 {
@@ -89,8 +90,10 @@ namespace FinanceManager.Modules
 
             OperationNumber.InnerText = newOperation.OperationNumber.ToString();
             OperationName.InnerText = newOperation.OperationName;
+
             From.InnerText = newOperation.From;
             To.InnerText = newOperation.To;
+
             Summ.InnerText = newOperation.Sum.ToString();
             Currency.InnerText = newOperation.Currency.ToString();
             Balance.InnerText = newOperation.Balance.ToString();
@@ -173,6 +176,8 @@ namespace FinanceManager.Modules
                             newAccount.AccountAmount = decimal.Parse(node.ChildNodes[3].InnerText);
 
                             List_BankAccounts.Add(newAccount);
+
+
                             TileManager.BankAccountsTab.AddTile(newAccount.AccountName);
                             break;
                         }
@@ -389,6 +394,26 @@ namespace FinanceManager.Modules
             }
         }
 
+
+
+        /// <summary>
+        /// Получить структуру PlasticCard по её "Объекту на форме"
+        /// </summary>
+        /// <param name="tile">Объект формы</param>
+        /// <returns></returns>
+        public static PlasticCard GetCardByTile(MetroTile tile)
+        {
+            for (int index = 0; index < List_PlasticCards.Count; index++)
+            {
+                if (List_PlasticCards[index].Name == tile.Text)
+                {
+                    return List_PlasticCards[index];
+                }
+            }
+
+            throw new Exception("Card not found");
+        }
+
         public static void SaveAll()
         {
             XmlAccountsDocument.Save(Properties.Resources.AccountsFile);
@@ -401,7 +426,7 @@ namespace FinanceManager.Modules
     /// </summary>
     public static class TileManager
     {
-        public static Form2 GlavnForm;
+        public static Explorer GlavnForm;
         public static MetroTabPage BankAccountsPage;
         public static MetroTabPage PlasticCardsPage;
 
@@ -627,7 +652,52 @@ namespace FinanceManager.Modules
     /// </summary>
     public static class ExchangeRates
     {
+        static List<CurrencyTableElement> CurrencyTable = new List<CurrencyTableElement>();
 
+        /// <summary>
+        /// Обновление курсов валют
+        /// </summary>
+        public static void Refresh()
+        {
+            foreach(byte num in Enum.GetValues(typeof(CurrencyType)))
+            {
+                foreach (byte num1 in Enum.GetValues(typeof(CurrencyType)))
+                {
+                    if (num == num1)
+                        continue;
+
+                    CurrencyTableElement element = new CurrencyTableElement()
+                    {
+                        currency1 = (CurrencyType)num,
+                        currency2 = (CurrencyType)num1,
+                        cost = 5.555m
+                    };
+
+                    CurrencyTable.Add(element);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Получение курса валюты 1 по отношению к валюте 2
+        /// </summary>
+        /// <param name="currency1">Валюта 1</param>
+        /// <param name="currency2">Валюта 2</param>
+        /// <returns></returns>
+        public static decimal getCost(CurrencyType currency1, CurrencyType currency2)
+        {
+            foreach(CurrencyTableElement element in CurrencyTable)
+            {
+                if(element.currency1 == currency1 && 
+                   element.currency2 == currency2)
+                {
+                    return element.cost;
+                }
+            }
+
+            return 0;
+        }
     }
 
 }

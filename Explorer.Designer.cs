@@ -1,6 +1,6 @@
 ﻿namespace FinanceManager
 {
-    partial class Form2
+    partial class Explorer
     {
         /// <summary>
         /// Required designer variable.
@@ -53,6 +53,7 @@
             this.добавитьОперациюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьОперациюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.показатьИнформациюПоКартеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.metroTabControl2.SuspendLayout();
@@ -112,22 +113,23 @@
             this.BankAccountsContext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BankAccountsContext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BankAccountsContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.показатьИнформациюПоКартеToolStripMenuItem,
             this.добавитьСчетToolStripMenuItem,
             this.удалитьСчетToolStripMenuItem});
             this.BankAccountsContext.Name = "BankAccountsContext";
-            this.BankAccountsContext.Size = new System.Drawing.Size(159, 48);
+            this.BankAccountsContext.Size = new System.Drawing.Size(263, 92);
             // 
             // добавитьСчетToolStripMenuItem
             // 
             this.добавитьСчетToolStripMenuItem.Name = "добавитьСчетToolStripMenuItem";
-            this.добавитьСчетToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.добавитьСчетToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.добавитьСчетToolStripMenuItem.Text = "Добавить счет";
             this.добавитьСчетToolStripMenuItem.Click += new System.EventHandler(this.добавитьСчетToolStripMenuItem_Click);
             // 
             // удалитьСчетToolStripMenuItem
             // 
             this.удалитьСчетToolStripMenuItem.Name = "удалитьСчетToolStripMenuItem";
-            this.удалитьСчетToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.удалитьСчетToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.удалитьСчетToolStripMenuItem.Text = "Удалить счет";
             this.удалитьСчетToolStripMenuItem.Click += new System.EventHandler(this.удалитьСчетToolStripMenuItem_Click);
             // 
@@ -262,7 +264,7 @@
             this.добавитьОперациюToolStripMenuItem,
             this.удалитьОперациюToolStripMenuItem});
             this.OperationsContextMenu.Name = "OperationsContextMenu";
-            this.OperationsContextMenu.Size = new System.Drawing.Size(195, 70);
+            this.OperationsContextMenu.Size = new System.Drawing.Size(195, 48);
             // 
             // добавитьОперациюToolStripMenuItem
             // 
@@ -285,12 +287,19 @@
             this.metroTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.metroTabControl1.Location = new System.Drawing.Point(20, 60);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 1;
             this.metroTabControl1.Size = new System.Drawing.Size(760, 347);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
             this.metroTabControl1.SizeChanged += new System.EventHandler(this.metroTabControl1_Resize);
             this.metroTabControl1.Resize += new System.EventHandler(this.metroTabControl1_Resize);
+            // 
+            // показатьИнформациюПоКартеToolStripMenuItem
+            // 
+            this.показатьИнформациюПоКартеToolStripMenuItem.Name = "показатьИнформациюПоКартеToolStripMenuItem";
+            this.показатьИнформациюПоКартеToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.показатьИнформациюПоКартеToolStripMenuItem.Text = "Показать информацию по карте";
+            this.показатьИнформациюПоКартеToolStripMenuItem.Click += new System.EventHandler(this.показатьИнформациюПоКартеToolStripMenuItem_Click);
             // 
             // Form2
             // 
@@ -317,7 +326,6 @@
         }
 
         #endregion
-        private MetroFramework.Components.MetroStyleManager metroStyleManager1;
         private MetroFramework.Controls.MetroTabControl metroTabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -341,5 +349,7 @@
         private System.Windows.Forms.ToolStripMenuItem добавитьОперациюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem удалитьОперациюToolStripMenuItem;
         public MetroFramework.Controls.MetroListView OperationsList;
+        public MetroFramework.Components.MetroStyleManager metroStyleManager1;
+        private System.Windows.Forms.ToolStripMenuItem показатьИнформациюПоКартеToolStripMenuItem;
     }
 }

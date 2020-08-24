@@ -58,22 +58,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddBankAccount.cs">
+    <Compile Include="Forms\AddBankAccount.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddBankAccount.Designer.cs">
+    <Compile Include="Forms\AddBankAccount.Designer.cs">
       <DependentUpon>AddBankAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddOperation.cs">
+    <Compile Include="Forms\AddOperation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddOperation.Designer.cs">
+    <Compile Include="Forms\AddOperation.Designer.cs">
       <DependentUpon>AddOperation.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddPlasticCard.cs">
+    <Compile Include="Forms\AddPlasticCard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddPlasticCard.Designer.cs">
+    <Compile Include="Forms\AddPlasticCard.Designer.cs">
       <DependentUpon>AddPlasticCard.cs</DependentUpon>
     </Compile>
     <Compile Include="AuthForm.cs">
@@ -82,31 +82,40 @@
     <Compile Include="AuthForm.Designer.cs">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form2.cs">
+    <Compile Include="Explorer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="Explorer.Designer.cs">
+      <DependentUpon>Explorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Show_CardInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Show_CardInfo.Designer.cs">
+      <DependentUpon>Show_CardInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Enums.cs" />
     <Compile Include="Modules\MyModule.cs" />
     <Compile Include="Modules\Structures.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddBankAccount.resx">
+    <EmbeddedResource Include="Forms\AddBankAccount.resx">
       <DependentUpon>AddBankAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddOperation.resx">
+    <EmbeddedResource Include="Forms\AddOperation.resx">
       <DependentUpon>AddOperation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddPlasticCard.resx">
+    <EmbeddedResource Include="Forms\AddPlasticCard.resx">
       <DependentUpon>AddPlasticCard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AuthForm.resx">
       <DependentUpon>AuthForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="Explorer.resx">
+      <DependentUpon>Explorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Show_CardInfo.resx">
+      <DependentUpon>Show_CardInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

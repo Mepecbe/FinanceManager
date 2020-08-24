@@ -40,6 +40,10 @@ namespace FinanceManager
             CurrencyType type = CurrencyType.BYN;
             Enum.TryParse<CurrencyType>(CurrencyComboBox.Text, out type);
 
+            string from = "";  //=============================================================
+            string to   = "";   //////////////////////////////// ДОДЕЛАТЬ ПРАВИЛЬНОЕ ВПИСЫВАНИЕ ИНФОРМАЦИИ
+#warning 'Не забудь доделать вписывание информации от и куда, и списание/начисление средств со счетов'
+
             Operations.AddOperation(this.OperationName.Text,
                                     this.FromComboBox.Text,
                                     this.ToAccountComboBox.Text,
