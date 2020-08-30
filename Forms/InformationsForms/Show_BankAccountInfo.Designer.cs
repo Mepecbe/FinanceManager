@@ -1,6 +1,6 @@
-﻿namespace FinanceManager.Forms
+﻿namespace FinanceManager.Forms.InformationsForms
 {
-    partial class Show_CardInfo
+    partial class Show_BankAccountInfo
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // Show_CardInfo
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(499, 365);
-            this.Name = "Show_CardInfo";
-            this.Text = "Информация о карте";
-            this.ResumeLayout(false);
-
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Text = "Show_BankAccountInfo";
         }
 
         #endregion

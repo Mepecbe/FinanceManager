@@ -34,6 +34,7 @@
             this.metroTabControl2 = new MetroFramework.Controls.MetroTabControl();
             this.BankAccountsPage = new MetroFramework.Controls.MetroTabPage();
             this.BankAccountsContext = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.показатьИнформациюПоСчетуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьСчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьСчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PlasticCardsPage = new MetroFramework.Controls.MetroTabPage();
@@ -53,7 +54,8 @@
             this.добавитьОперациюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьОперациюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.показатьИнформациюПоКартеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.информацияОКартеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.metroTabControl2.SuspendLayout();
@@ -113,23 +115,30 @@
             this.BankAccountsContext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.BankAccountsContext.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.BankAccountsContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.показатьИнформациюПоКартеToolStripMenuItem,
+            this.показатьИнформациюПоСчетуToolStripMenuItem,
             this.добавитьСчетToolStripMenuItem,
             this.удалитьСчетToolStripMenuItem});
             this.BankAccountsContext.Name = "BankAccountsContext";
-            this.BankAccountsContext.Size = new System.Drawing.Size(263, 92);
+            this.BankAccountsContext.Size = new System.Drawing.Size(254, 70);
+            // 
+            // показатьИнформациюПоСчетуToolStripMenuItem
+            // 
+            this.показатьИнформациюПоСчетуToolStripMenuItem.Name = "показатьИнформациюПоСчетуToolStripMenuItem";
+            this.показатьИнформациюПоСчетуToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
+            this.показатьИнформациюПоСчетуToolStripMenuItem.Text = "Показать информацию по счету";
+            this.показатьИнформациюПоСчетуToolStripMenuItem.Click += new System.EventHandler(this.показатьИнформациюПоСчетуToolStripMenuItem_Click);
             // 
             // добавитьСчетToolStripMenuItem
             // 
             this.добавитьСчетToolStripMenuItem.Name = "добавитьСчетToolStripMenuItem";
-            this.добавитьСчетToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.добавитьСчетToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
             this.добавитьСчетToolStripMenuItem.Text = "Добавить счет";
             this.добавитьСчетToolStripMenuItem.Click += new System.EventHandler(this.добавитьСчетToolStripMenuItem_Click);
             // 
             // удалитьСчетToolStripMenuItem
             // 
             this.удалитьСчетToolStripMenuItem.Name = "удалитьСчетToolStripMenuItem";
-            this.удалитьСчетToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.удалитьСчетToolStripMenuItem.Size = new System.Drawing.Size(253, 22);
             this.удалитьСчетToolStripMenuItem.Text = "Удалить счет";
             this.удалитьСчетToolStripMenuItem.Click += new System.EventHandler(this.удалитьСчетToolStripMenuItem_Click);
             // 
@@ -153,22 +162,23 @@
             this.PlasticCardContextMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.PlasticCardContextMenu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.PlasticCardContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.информацияОКартеToolStripMenuItem,
             this.добавитьПластиковуюКартуToolStripMenuItem,
             this.удалитьПластиковуюКартуToolStripMenuItem});
             this.PlasticCardContextMenu.Name = "PlasticCardContextMenu";
-            this.PlasticCardContextMenu.Size = new System.Drawing.Size(245, 48);
+            this.PlasticCardContextMenu.Size = new System.Drawing.Size(236, 70);
             // 
             // добавитьПластиковуюКартуToolStripMenuItem
             // 
             this.добавитьПластиковуюКартуToolStripMenuItem.Name = "добавитьПластиковуюКартуToolStripMenuItem";
-            this.добавитьПластиковуюКартуToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.добавитьПластиковуюКартуToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.добавитьПластиковуюКартуToolStripMenuItem.Text = "Добавить пластиковую карту";
             this.добавитьПластиковуюКартуToolStripMenuItem.Click += new System.EventHandler(this.добавитьПластиковуюКартуToolStripMenuItem_Click);
             // 
             // удалитьПластиковуюКартуToolStripMenuItem
             // 
             this.удалитьПластиковуюКартуToolStripMenuItem.Name = "удалитьПластиковуюКартуToolStripMenuItem";
-            this.удалитьПластиковуюКартуToolStripMenuItem.Size = new System.Drawing.Size(244, 22);
+            this.удалитьПластиковуюКартуToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.удалитьПластиковуюКартуToolStripMenuItem.Text = "Удалить пластиковую карту";
             this.удалитьПластиковуюКартуToolStripMenuItem.Click += new System.EventHandler(this.удалитьПластиковуюКартуToolStripMenuItem_Click);
             // 
@@ -264,19 +274,19 @@
             this.добавитьОперациюToolStripMenuItem,
             this.удалитьОперациюToolStripMenuItem});
             this.OperationsContextMenu.Name = "OperationsContextMenu";
-            this.OperationsContextMenu.Size = new System.Drawing.Size(195, 48);
+            this.OperationsContextMenu.Size = new System.Drawing.Size(187, 48);
             // 
             // добавитьОперациюToolStripMenuItem
             // 
             this.добавитьОперациюToolStripMenuItem.Name = "добавитьОперациюToolStripMenuItem";
-            this.добавитьОперациюToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.добавитьОперациюToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.добавитьОперациюToolStripMenuItem.Text = "Добавить операцию";
             this.добавитьОперациюToolStripMenuItem.Click += new System.EventHandler(this.добавитьОперациюToolStripMenuItem_Click);
             // 
             // удалитьОперациюToolStripMenuItem
             // 
             this.удалитьОперациюToolStripMenuItem.Name = "удалитьОперациюToolStripMenuItem";
-            this.удалитьОперациюToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.удалитьОперациюToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
             this.удалитьОперациюToolStripMenuItem.Text = "Удалить операцию";
             this.удалитьОперациюToolStripMenuItem.Click += new System.EventHandler(this.удалитьОперациюToolStripMenuItem_Click);
             // 
@@ -294,21 +304,31 @@
             this.metroTabControl1.SizeChanged += new System.EventHandler(this.metroTabControl1_Resize);
             this.metroTabControl1.Resize += new System.EventHandler(this.metroTabControl1_Resize);
             // 
-            // показатьИнформациюПоКартеToolStripMenuItem
+            // информацияОКартеToolStripMenuItem
             // 
-            this.показатьИнформациюПоКартеToolStripMenuItem.Name = "показатьИнформациюПоКартеToolStripMenuItem";
-            this.показатьИнформациюПоКартеToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.показатьИнформациюПоКартеToolStripMenuItem.Text = "Показать информацию по карте";
-            this.показатьИнформациюПоКартеToolStripMenuItem.Click += new System.EventHandler(this.показатьИнформациюПоКартеToolStripMenuItem_Click);
+            this.информацияОКартеToolStripMenuItem.Name = "информацияОКартеToolStripMenuItem";
+            this.информацияОКартеToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.информацияОКартеToolStripMenuItem.Text = "Информация о карте";
+            this.информацияОКартеToolStripMenuItem.Click += new System.EventHandler(this.информацияОКартеToolStripMenuItem_Click);
             // 
-            // Form2
+            // metroButton1
+            // 
+            this.metroButton1.Location = new System.Drawing.Point(656, 5);
+            this.metroButton1.Name = "metroButton1";
+            this.metroButton1.Size = new System.Drawing.Size(100, 19);
+            this.metroButton1.TabIndex = 3;
+            this.metroButton1.Text = "Настройки";
+            this.metroButton1.UseSelectable = true;
+            // 
+            // Explorer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 427);
+            this.Controls.Add(this.metroButton1);
             this.Controls.Add(this.metroTabControl1);
             this.MinimumSize = new System.Drawing.Size(652, 0);
-            this.Name = "Form2";
+            this.Name = "Explorer";
             this.Text = "Обозреватель";
             this.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
@@ -350,6 +370,8 @@
         private System.Windows.Forms.ToolStripMenuItem удалитьОперациюToolStripMenuItem;
         public MetroFramework.Controls.MetroListView OperationsList;
         public MetroFramework.Components.MetroStyleManager metroStyleManager1;
-        private System.Windows.Forms.ToolStripMenuItem показатьИнформациюПоКартеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem показатьИнформациюПоСчетуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem информацияОКартеToolStripMenuItem;
+        private MetroFramework.Controls.MetroButton metroButton1;
     }
 }

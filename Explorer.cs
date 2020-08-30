@@ -41,7 +41,7 @@ namespace FinanceManager
         
         private void metroTabControl1_Resize(object sender, EventArgs e)
         {
-            CheckRePaint();
+            CheckRePaint(); 
         }
 
         private async Task CheckRePaint()
@@ -161,11 +161,25 @@ namespace FinanceManager
         {
             Accounts.BankAccounts.DeleteAccount(this.tile);
         }
-
-        private void показатьИнформациюПоКартеToolStripMenuItem_Click(object sender, EventArgs e)
+        
+        private void информацияОКартеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Вывод информации о карте
-            
+            //Вывести информацию по карте
+            PlasticCard cardInfo = Accounts.PlasticCards.GetPlasticCardByTile(tile);
+            FinanceManager.Forms.InformationsForms.Show_CardInfo InfoForm =
+                new Forms.InformationsForms.Show_CardInfo(cardInfo.CardNumber,
+                cardInfo.Date,
+                cardInfo.CardHolder,
+                "123",
+                cardInfo.AccountAmount,
+                cardInfo.Currency.ToString());
+
+            InfoForm.ShowDialog();
+        }
+
+        private void показатьИнформациюПоСчетуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Информация о счете
         }
     }
 }

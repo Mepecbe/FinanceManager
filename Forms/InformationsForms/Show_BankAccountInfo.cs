@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FinanceManager.Forms
+namespace FinanceManager.Forms.InformationsForms
 {
-    public partial class Show_CardInfo : MetroFramework.Forms.MetroForm
+    public partial class Show_BankAccountInfo : MetroFramework.Forms.MetroForm
     {
-        public Show_CardInfo()
+        public Show_BankAccountInfo()
         {
             InitializeComponent();
         }

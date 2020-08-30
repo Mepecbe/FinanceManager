@@ -392,6 +392,21 @@ namespace FinanceManager.Modules
 
                 TileManager.PlasticCardsTab.DeleteTile(tile);
             }
+
+            public static PlasticCard GetPlasticCardByTile(MetroFramework.Controls.MetroTile tile)
+            {
+                if (tile == null) throw new Exception("Tile is null");
+
+                for (int index = 0; index < List_PlasticCards.Count; index++)
+                {
+                    if (List_PlasticCards[index].Name == tile.Text)
+                    {
+                        return List_PlasticCards[index];
+                    }
+                }
+
+                throw new Exception("Tile not found");
+            }
         }
 
 
