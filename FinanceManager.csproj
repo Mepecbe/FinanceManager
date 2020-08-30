@@ -100,11 +100,17 @@
     <Compile Include="Forms\InformationsForms\Show_CardInfo.Designer.cs">
       <DependentUpon>Show_CardInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Settings.cs">
+    <Compile Include="Forms\Settings Forms\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Settings.Designer.cs">
+    <Compile Include="Forms\Settings Forms\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Settings Forms\Setting_Exchanger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Settings Forms\Setting_Exchanger.Designer.cs">
+      <DependentUpon>Setting_Exchanger.cs</DependentUpon>
     </Compile>
     <Compile Include="Modules\Enums.cs" />
     <Compile Include="Modules\MyModule.cs" />
@@ -129,8 +135,11 @@
     <EmbeddedResource Include="Forms\InformationsForms\Show_CardInfo.resx">
       <DependentUpon>Show_CardInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Settings.resx">
+    <EmbeddedResource Include="Forms\Settings Forms\Settings.resx">
       <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Settings Forms\Setting_Exchanger.resx">
+      <DependentUpon>Setting_Exchanger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

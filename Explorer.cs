@@ -181,5 +181,10 @@ namespace FinanceManager
         {
             //Информация о счете
         }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            new FinanceManager.Forms.Settings_Forms.Settings().ShowDialog();
+        }
     }
 }

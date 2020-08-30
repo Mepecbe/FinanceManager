@@ -39,6 +39,7 @@
             this.удалитьСчетToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PlasticCardsPage = new MetroFramework.Controls.MetroTabPage();
             this.PlasticCardContextMenu = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.информацияОКартеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьПластиковуюКартуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьПластиковуюКартуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTabPage3 = new MetroFramework.Controls.MetroTabPage();
@@ -54,7 +55,6 @@
             this.добавитьОперациюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.удалитьОперациюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
-            this.информацияОКартеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroButton1 = new MetroFramework.Controls.MetroButton();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager1)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -167,6 +167,13 @@
             this.удалитьПластиковуюКартуToolStripMenuItem});
             this.PlasticCardContextMenu.Name = "PlasticCardContextMenu";
             this.PlasticCardContextMenu.Size = new System.Drawing.Size(236, 70);
+            // 
+            // информацияОКартеToolStripMenuItem
+            // 
+            this.информацияОКартеToolStripMenuItem.Name = "информацияОКартеToolStripMenuItem";
+            this.информацияОКартеToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.информацияОКартеToolStripMenuItem.Text = "Информация о карте";
+            this.информацияОКартеToolStripMenuItem.Click += new System.EventHandler(this.информацияОКартеToolStripMenuItem_Click);
             // 
             // добавитьПластиковуюКартуToolStripMenuItem
             // 
@@ -304,21 +311,15 @@
             this.metroTabControl1.SizeChanged += new System.EventHandler(this.metroTabControl1_Resize);
             this.metroTabControl1.Resize += new System.EventHandler(this.metroTabControl1_Resize);
             // 
-            // информацияОКартеToolStripMenuItem
-            // 
-            this.информацияОКартеToolStripMenuItem.Name = "информацияОКартеToolStripMenuItem";
-            this.информацияОКартеToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
-            this.информацияОКартеToolStripMenuItem.Text = "Информация о карте";
-            this.информацияОКартеToolStripMenuItem.Click += new System.EventHandler(this.информацияОКартеToolStripMenuItem_Click);
-            // 
             // metroButton1
             // 
-            this.metroButton1.Location = new System.Drawing.Point(656, 5);
+            this.metroButton1.Location = new System.Drawing.Point(618, 5);
             this.metroButton1.Name = "metroButton1";
             this.metroButton1.Size = new System.Drawing.Size(100, 19);
             this.metroButton1.TabIndex = 3;
             this.metroButton1.Text = "Настройки";
             this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
             // Explorer
             // 
