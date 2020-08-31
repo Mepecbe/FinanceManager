@@ -40,15 +40,44 @@ namespace FinanceManager
             CurrencyType type = CurrencyType.BYN;
             Enum.TryParse<CurrencyType>(CurrencyComboBox.Text, out type);
 
-            string from = "";  //=============================================================
-            string to   = "";   //////////////////////////////// ДОДЕЛАТЬ ПРАВИЛЬНОЕ ВПИСЫВАНИЕ ИНФОРМАЦИИ
-#warning 'Не забудь доделать вписывание информации от и куда, и списание/начисление средств со счетов'
+            string fromType = "";
+            string from = "";
 
+            string toType = "";
+            string to   = ""; 
+
+            {
+                if (EnterManuallyFromCheckBox.Checked)
+                {
+                    fromType = "*MANUALLY*";
+                    from = FromTextBox.Text;
+                }
+                else
+                {
+                    fromType = FromAccountTypeComboBox.Text;
+                    from = FromComboBox.Text;
+                }
+
+                if (EnterManuallyToCheckBox.Checked)
+                {
+                    toType = "*MANUALLY*";
+                    to = ToTextBox.Text;
+                }
+                else
+                {
+                    toType = ToAccountTypeComboBox.Text;
+                    to = ToAccountComboBox.Text;
+                }
+            }
+                       
             Operations.AddOperation(this.OperationName.Text,
-                                    this.FromComboBox.Text,
-                                    this.ToAccountComboBox.Text,
+                                    fromType,
+                                    from,
+                                    toType,
+                                    to,
                                     decimal.Parse(SummaTextBox.Text),
                                     type);
+                      
 
             MetroFramework.MetroMessageBox.Show(this, "Операция добавлена!");
             this.Close();

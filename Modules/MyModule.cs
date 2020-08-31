@@ -37,12 +37,16 @@ namespace FinanceManager.Modules
                 Operation newOperation = new Operation();
                 newOperation.OperationNumber = UInt16.Parse(element.ChildNodes[0].InnerText);
                 newOperation.OperationName = element.ChildNodes[1].InnerText;
-                newOperation.From = element.ChildNodes[2].InnerText;
-                newOperation.To = element.ChildNodes[3].InnerText;
-                newOperation.Sum = decimal.Parse(element.ChildNodes[4].InnerText);
+                newOperation.FromAccountType = element.ChildNodes[2].InnerText;
+                newOperation.From = element.ChildNodes[3].InnerText;
+
+                newOperation.ToAccountType = element.ChildNodes[4].InnerText;
+                newOperation.To = element.ChildNodes[5].InnerText;
+
+                newOperation.Sum = decimal.Parse(element.ChildNodes[6].InnerText);
                 
                 CurrencyType currency = CurrencyType.USD;
-                Enum.TryParse(element.ChildNodes[5].InnerText, out currency);
+                Enum.TryParse(element.ChildNodes[7].InnerText, out currency);
 
                 newOperation.Currency = currency;
                 newOperation.Balance = decimal.Parse(element.ChildNodes[6].InnerText);
@@ -63,57 +67,103 @@ namespace FinanceManager.Modules
             return 1 + (UInt32)List_Operations.Count;
         }
 
-        public static void AddOperation(string name, string from, string to, decimal sum, CurrencyType currency)
+        public static void AddOperation(string name, string fromType, string from, string toType, string to, decimal sum, CurrencyType currency)
         {
             Operation newOperation = new Operation()
             {
                 OperationNumber = GetNewOperationNumber(),
                 OperationName = name,
+                FromAccountType = fromType,
                 From = from,
+                ToAccountType = toType,
                 To = to,
                 Sum = sum,
                 Currency = currency,
                 Balance = (decimal)9999.9       //БАЛАНС, ОСТАТОК НА СЧЕТУ
+                #warning 'Доделать отображение остатка в операции'
             };
 
             List_Operations.Add(newOperation);
 
-            XmlElement XmlOperation    = XmlOperationsDocument.CreateElement("operation");
+            {
+                //Добавление в XML 
+                XmlElement XmlOperation = XmlOperationsDocument.CreateElement("operation");
 
-            XmlElement OperationNumber = XmlOperationsDocument.CreateElement("number");
-            XmlElement OperationName   = XmlOperationsDocument.CreateElement("name");
-            XmlElement From            = XmlOperationsDocument.CreateElement("from");
-            XmlElement To              = XmlOperationsDocument.CreateElement("to");
-            XmlElement Summ            = XmlOperationsDocument.CreateElement("Summ");
-            XmlElement Currency        = XmlOperationsDocument.CreateElement("currency");
-            XmlElement Balance         = XmlOperationsDocument.CreateElement("balance");
+                XmlElement OperationNumber = XmlOperationsDocument.CreateElement("number");
+                XmlElement OperationName = XmlOperationsDocument.CreateElement("name");
+                XmlElement FromType = XmlOperationsDocument.CreateElement("fromType");
+                XmlElement From = XmlOperationsDocument.CreateElement("from");
+                XmlElement ToType = XmlOperationsDocument.CreateElement("toType");
+                XmlElement To = XmlOperationsDocument.CreateElement("to");
+                XmlElement Summ = XmlOperationsDocument.CreateElement("Summ");
+                XmlElement Currency = XmlOperationsDocument.CreateElement("currency");
+                XmlElement Balance = XmlOperationsDocument.CreateElement("balance");
 
-            OperationNumber.InnerText = newOperation.OperationNumber.ToString();
-            OperationName.InnerText = newOperation.OperationName;
+                OperationNumber.InnerText = newOperation.OperationNumber.ToString();
+                OperationName.InnerText = newOperation.OperationName;
 
-            From.InnerText = newOperation.From;
-            To.InnerText = newOperation.To;
+                FromType.InnerText = newOperation.FromAccountType;
+                From.InnerText = newOperation.From;
 
-            Summ.InnerText = newOperation.Sum.ToString();
-            Currency.InnerText = newOperation.Currency.ToString();
-            Balance.InnerText = newOperation.Balance.ToString();
+                ToType.InnerText = newOperation.ToAccountType;
+                To.InnerText = newOperation.To;
 
-            XmlOperation.AppendChild(OperationNumber);
-            XmlOperation.AppendChild(OperationName);
-            XmlOperation.AppendChild(From);
-            XmlOperation.AppendChild(To);
-            XmlOperation.AppendChild(Summ);
-            XmlOperation.AppendChild(Currency);
-            XmlOperation.AppendChild(Balance);
+                Summ.InnerText = newOperation.Sum.ToString();
+                Currency.InnerText = newOperation.Currency.ToString();
+                Balance.InnerText = newOperation.Balance.ToString();
 
-            XmlOperationsDocument.DocumentElement.AppendChild(XmlOperation);
+                XmlOperation.AppendChild(OperationNumber);
+                XmlOperation.AppendChild(OperationName);
+                XmlOperation.AppendChild(FromType);
+                XmlOperation.AppendChild(From);
+                XmlOperation.AppendChild(ToType);
+                XmlOperation.AppendChild(To);
+                XmlOperation.AppendChild(Summ);
+                XmlOperation.AppendChild(Currency);
+                XmlOperation.AppendChild(Balance);
 
-            //Добавление на форму
+                XmlOperationsDocument.DocumentElement.AppendChild(XmlOperation);
+            }
+
+            //Добавление на форму в табличку
             ListViewItem item = TileManager.GlavnForm.OperationsList.Items.Add(newOperation.OperationNumber.ToString());
             item.SubItems.Add(newOperation.OperationName);
             item.SubItems.Add(newOperation.From);
             item.SubItems.Add(newOperation.To);
             item.SubItems.Add(newOperation.Sum.ToString());
+
+            //"Осуществление операции", зачисление и списание средств
+            {
+                //Снятие средств
+                if (fromType != "*MANUALLY*")
+                {
+                    switch (fromType)
+                    {
+                        case "Пластиковая карта":
+                            {
+                                Accounts.PlasticCards.WithdrawFromCard(from, sum, currency);
+                                break;
+                            }
+                    }
+                }
+
+                //Зачисление средств
+                if (toType != "*MANUALLY*")
+                {
+                    switch (toType)
+                    {
+                        case "Пластиковая карта":
+                            {
+                                Accounts.PlasticCards.AddToCard(to, sum, currency);
+                                break;
+                            }
+                    }
+                }
+            }
+
+            //Необходимо сохранять все данные по окончанию проведения операции
+            Accounts.SaveAll();
+            Operations.SaveAll();
         }
 
 
@@ -190,6 +240,7 @@ namespace FinanceManager.Modules
                             newCard.CardHolder = node.ChildNodes[2].InnerText;
                             newCard.CardNumber = node.ChildNodes[3].InnerText;
                             newCard.Date = node.ChildNodes[4].InnerText;
+                            newCard.PlasticCardInXml = node;
                             Enum.TryParse(node.ChildNodes[5].InnerText, out newCard.Currency);
                             newCard.AccountAmount = decimal.Parse(node.ChildNodes[6].InnerText);
 
@@ -321,7 +372,6 @@ namespace FinanceManager.Modules
                     AccountAmount = Amount
                 };
                
-                List_PlasticCards.Add(newPlasticCard);
                 
 
 
@@ -363,7 +413,12 @@ namespace FinanceManager.Modules
                     xmlAccount.AppendChild(XmlAmount);
 
                     XmlAccountsDocument.DocumentElement.AppendChild(xmlAccount);
+
+                    //Добавление ссылки на представление карты в XML в структуру
+                    newPlasticCard.PlasticCardInXml = xmlAccount;
                 }
+
+                List_PlasticCards.Add(newPlasticCard);
             }
 
             public static void DeleteAccount(MetroFramework.Controls.MetroTile tile)
@@ -406,6 +461,76 @@ namespace FinanceManager.Modules
                 }
 
                 throw new Exception("Tile not found");
+            }
+
+
+
+            private static int GetCardIndexByName(string cardName)
+            {
+                for (int index = 0; index < List_PlasticCards.Count; index++)
+                {
+                    if (List_PlasticCards[index].Name == cardName)
+                    {
+                        return index;
+                    }
+                }
+
+                throw new Exception("Card not found");
+            }
+
+
+            /// <summary>
+            /// Зачислить средства на карту
+            /// </summary>
+            /// <param name="cardName">Наименование карты</param>
+            /// <param name="value">Количество денег</param>
+            /// <param name="type">Валюта</param>
+            public static void AddToCard(string cardName, decimal value, CurrencyType type)
+            {
+                int index = GetCardIndexByName(cardName);
+                
+                if (List_PlasticCards[index].Currency == type)
+                {
+                    //Валюты совпадают, не нужно конвертировать курс
+                    PlasticCard buffer = List_PlasticCards[index];
+                    buffer.AccountAmount += value;
+                    List_PlasticCards[index] = buffer;
+
+                    List_PlasticCards[index].UpdateXmlAmount();
+                }
+                else
+                {
+                    //Нужно конвертировать курс
+                    throw new Exception("Currency not equal");
+                }                
+            }
+
+
+            /// <summary>
+            /// Вычесть из карты средства
+            /// </summary>
+            /// <param name="cardName">Наименование карты</param>
+            /// <param name="value">Количество денег</param>
+            /// <param name="type">Валюта</param>
+            public static void WithdrawFromCard(string cardName, decimal value, CurrencyType type)
+            {
+                int index = GetCardIndexByName(cardName);
+
+                if (List_PlasticCards[index].Currency == type)
+                {
+                    //Валюты совпадают, не нужно конвертировать курс
+#warning "ПОДУМАТЬ НАД ЭТИМ БАГОМ ИЗМЕНЕНИЯ ЗНАЧЕНИЯ ПЕРЕМЕННОЙ"
+
+                    PlasticCard buffer = List_PlasticCards[index];
+                    buffer.AccountAmount -= value;
+                    List_PlasticCards[index] = buffer;
+                    List_PlasticCards[index].UpdateXmlAmount();
+                }
+                else
+                {
+                    //Нужно конвертировать курс
+                    throw new Exception("Currency not equal");
+                }
             }
         }
 

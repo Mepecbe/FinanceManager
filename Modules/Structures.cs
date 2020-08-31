@@ -51,8 +51,15 @@ namespace FinanceManager.Modules.Structures
         public string Date;
         public decimal AccountAmount;
         public CurrencyType Currency;
+        public XmlNode PlasticCardInXml;
 
         public MetroFramework.Controls.MetroTile AccountFormTile;
+
+        public void UpdateXmlAmount()
+        {
+            //Редактирование информации о карте в XML
+            this.PlasticCardInXml.ChildNodes[6].InnerText = this.AccountAmount.ToString();
+        }
     }
 
     /// <summary>
@@ -83,8 +90,13 @@ namespace FinanceManager.Modules.Structures
     {
         public UInt32 OperationNumber; //Уникальный номер операции
         public string OperationName;   //Наименование операции
+
+        public string FromAccountType; //Тип счета, откуда снимаются средства
         public string From;            //Откуда
+
+        public string ToAccountType;   //Тип счета, куда переводятся средства
         public string To;              //Куда
+
         public decimal Sum;            //Сумма
         public CurrencyType Currency;  //Валюта денег, которые задействованы в переводе
         public decimal Balance;        //Остаток на балансе счета, с которого производится операция

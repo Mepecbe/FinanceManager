@@ -166,13 +166,14 @@ namespace FinanceManager
         {
             //Вывести информацию по карте
             PlasticCard cardInfo = Accounts.PlasticCards.GetPlasticCardByTile(tile);
-            FinanceManager.Forms.InformationsForms.Show_CardInfo InfoForm =
-                new Forms.InformationsForms.Show_CardInfo(cardInfo.CardNumber,
+            FinanceManager.Forms.InformationsForms.Show_CardInfo InfoForm = new Forms.InformationsForms.Show_CardInfo(
+                cardInfo.CardNumber,
                 cardInfo.Date,
                 cardInfo.CardHolder,
                 "123",
                 cardInfo.AccountAmount,
-                cardInfo.Currency.ToString());
+                cardInfo.Currency.ToString()
+           );
 
             InfoForm.ShowDialog();
         }
